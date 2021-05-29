@@ -1,4 +1,4 @@
-baseURL = "http://www.wuxianjie.net/" # The URL of your site.
+baseURL = "http://121.196.201.221/" # The URL of your site.
 title = "吴仙杰的博客" # Title of your site
 theme = "zzo" # Name of Zzo theme folder in `themes/`.
 
@@ -32,7 +32,7 @@ googleAnalytics = ""
   [markup.tableOfContents]
     endLevel = 4
     ordered = false
-    startLevel = 1
+    startLevel = 2
 
 [outputs]
   home = ["HTML", "RSS", "SearchIndex"]
