@@ -9,36 +9,31 @@ series:
 - JavaScript Docs
 title: JavaScript 函数中的 this 值
 date: 2021-05-29T15:25:54+08:00
-description: 动态修改 JavaScript 函数中的 this 值
+description: 动态修改 JS 函数中的 this 值。
 pinned: true  
 ---
 
-> {{<reprint>}}
+> {{< reprint >}}
 
-JS 函数中的 `this` 可被动态修改，这为重用函数提供了极大的灵活性。
-
-假设已有下面代码：
+{{< param description >}}
 
 ```:index.js
-'use strict';
-
 const jsCourse = {
   subject: 'JavaScript',
   description: '一门流行的前端编程语言',
   people: 0,
 
-  show(like, stars) {
+  score(like, stars) {
     console.log(`${this.subject}：${this.description}
-已有${++this.people}人评价，您的评价为：${
-        like ? '👍' : '👎'} ${'⭐️'.repeat(stars)}`);
+已有${++this.people}人评价，\
+您的评价为：${like ? '👍' : '👎'} ${'⭐️'.repeat(stars)}`);
   }
 };
 
-jsCourse.show(false, 3);
+jsCourse.score(false, 3);
 // JavaScript：一门流行的前端编程语言
 // 已有1人评价，您的评价为：👎 ⭐️⭐️⭐️
 
-// 该对象没有 `show` 方法，需复用 `jsCourse.show` 方法
 const nodeCourse = {
   subject: 'Node.js',
   description: '后端 JS 运行环境',
@@ -61,7 +56,8 @@ call(thisArg, arg1, ... , argN)
 示例：
 
 ```:index.js
-jsCourse.show.call(nodeCourse, true, 5);
+// 将 `jsCourse.score` 作为 `nodeCourse` 的方法使用
+jsCourse.score.call(nodeCourse, true, 5);
 // Node.js：后端 JS 运行环境
 // 已有1人评价，您的评价为：👍 ⭐️⭐️⭐️⭐️⭐️
 ```
@@ -78,18 +74,20 @@ apply(thisArg, argsArray)
 示例：
 
 ```:index.js
-jsCourse.show.apply(nodeCourse, [true, 5]);
+// 将 `jsCourse.score` 作为 `nodeCourse` 的方法使用
+jsCourse.score.apply(nodeCourse, [true, 5]);
 // Node.js：后端 JS 运行环境
 // 已有1人评价，您的评价为：👍 ⭐️⭐️⭐️⭐️⭐️
 ```
 
-{{<alert theme="info" dir="ltr">}}
-`apply` 方法在现代 JS（从 ES 2015 开始）中很少使用，一般都使用 `call` 方法。
+{{< alert theme="info" dir="ltr" >}}
+`apply` 和 [`call`]({{< relref "#functionprototypecall" >}}) 除了第二个参数不同外，其他没有任何区别。
+在现代 JS（从 ES 2015 开始）中已很少使用 `apply`，因为通过 [Spread 语法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)可以统一代码，全部使用 `call` 方法。
 
 ```index.js
-jsCourse.show.call(nodeCourse, ...[true, 5]);
+jsCourse.score.call(nodeCourse, ...[true, 5]);
 ```
-{{</alert>}}
+{{< /alert >}}
 
 ## Function.prototype.bind()
 
@@ -105,24 +103,24 @@ bind(thisArg, arg1, ... , argN)
 示例：
 
 ```:index.js
-const showNode = jsCourse.show.bind(nodeCourse);
+const scoreNode = jsCourse.score.bind(nodeCourse);
 
-showNode(true, 4);
+scoreNode(true, 4);
 // Node.js：后端 JS 运行环境
 // 已有1人评价，您的评价为：👍 ⭐️⭐️⭐️⭐️
 
 // Partial application
-const showNodeLike = jsCourse.show.bind(nodeCourse, true);
+const scoreNodeLike = jsCourse.score.bind(nodeCourse, true);
 
-showNodeLike(5);
+scoreNodeLike(5);
 // Node.js：后端 JS 运行环境
 // 已有2人评价，您的评价为：👍 ⭐️⭐️⭐️⭐️⭐️
 ```
 
 `bind` 方法还常用于事件监听器：
 
-{{<codes js html>}}
-  {{<code>}}
+{{< codes js html >}}
+  {{< code >}}
   ```:index.js
   const electronCourse = {
     subject: 'Electron',
@@ -136,28 +134,31 @@ showNodeLike(5);
   }
 
   document.querySelector('.btn-like')
-  .addEventListener('click', electronCourse.like.bind(electronCourse));
+    .addEventListener('click', electronCourse.like.bind(electronCourse));
   // Object {subject: "Electron", likes: 0, like: ƒ}
   // Electron，点赞数 👍：1
   ```
-  {{</code>}}
+  {{< /code >}}
 
-  {{<code>}}
+  {{< code >}}
   ```:index.html
   <div>
     <button class="btn-like">喜欢</button>
   </div>
+  
+  <script src="index.js"></script>
   ```
-  {{</code>}}
-{{</codes>}}
+  {{< /code >}}
+{{< /codes >}}
 
-{{<alert theme="danger" dir="ltr">}}
-下面代码是**错误**的，其中 `this` 的值为 *HTML Button 元素*。
+{{< alert theme="danger" dir="ltr" >}}
+由于事件处理函数会绑定自己的 this 值。
+因此下面代码是**错误**的，其中 `this` 的值为 *HTML Button 元素*。
 
 ```:index.js
 document.querySelector('.btn-like')
-.addEventListener('click', electronCourse.like);
+  .addEventListener('click', electronCourse.like);
 // <button class="btn-like">喜欢</button>
 // undefined，点赞数 👍：NaN
 ```
-{{</alert>}}
+{{< /alert >}}
