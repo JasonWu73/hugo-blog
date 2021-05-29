@@ -66,9 +66,6 @@ jsCourse.show.call(nodeCourse, true, 5);
 // 已有1人评价，您的评价为：👍 ⭐️⭐️⭐️⭐️⭐️
 ```
 
-参考：
-- [Function.prototype.call() | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call)
-
 ## Function.prototype.apply()
 
 语法：
@@ -93,10 +90,6 @@ jsCourse.show.apply(nodeCourse, [true, 5]);
 jsCourse.show.call(nodeCourse, ...[true, 5]);
 ```
 {{</alert>}}
-
-参考：
-- [Function.prototype.apply() | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)
-- [Spread syntax (...) | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
 
 ## Function.prototype.bind()
 
@@ -168,7 +161,3 @@ document.querySelector('.btn-like')
 // undefined，点赞数 👍：NaN
 ```
 {{</alert>}}
-
-参考：
-- [Function.prototype.bind() | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind)
-- [Javascript- Currying VS Partial Application](https://towardsdatascience.com/javascript-currying-vs-partial-application-4db5b2442be8)
