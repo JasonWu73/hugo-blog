@@ -84,7 +84,7 @@ jsCourse.score.apply(nodeCourse, [true, 5]);
 `apply` 和 [`call`]({{< relref "#functionprototypecall" >}}) 除了第二个参数不同外，其他没有任何区别。
 在现代 JS（从 ES 2015 开始）中已很少使用 `apply`，因为通过 [Spread 语法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)可以统一代码，全部使用 `call` 方法。
 
-```index.js
+```:index.js
 jsCourse.score.call(nodeCourse, ...[true, 5]);
 ```
 {{< /alert >}}
