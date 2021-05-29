@@ -24,7 +24,7 @@ description: 理解 JS 中的异步和同步代码。
 
 比如同步函数 `alert`：
 
-{{< codes js html >}}
+{{< codes index.js index.html >}}
   {{< code >}}
   ```:index.js
   const p = document.querySelector('.paragraph');
@@ -35,7 +35,7 @@ description: 理解 JS 中的异步和同步代码。
   {{< /code >}}
 
   {{< code >}}
-  ```index.html
+  ```:index.html
   <p class="paragraph">初始内容</p>
 
   <script src="index.js"></script>
@@ -51,7 +51,7 @@ description: 理解 JS 中的异步和同步代码。
 
 比如异步函数 `setTimeout`：
 
-{{< codes js html >}}
+{{< codes index.js index.html >}}
 {{< code >}}
   ```:index.js
   const p = document.querySelector('.paragraph');
@@ -63,7 +63,7 @@ description: 理解 JS 中的异步和同步代码。
 {{< /code >}}
 
 {{< code >}}
-  ```index.html
+  ```:index.html
   <p class="paragraph">初始内容</p>
 
   <script src="index.js"></script>
@@ -73,7 +73,7 @@ description: 理解 JS 中的异步和同步代码。
 
 再比如加载图片也属于异步操作：
 
-{{< codes js html >}}
+{{< codes index.js index.html >}}
 {{< code >}}
   ```:index.js
   const img = document.querySelector('.logo');
@@ -92,7 +92,7 @@ description: 理解 JS 中的异步和同步代码。
 {{< /code >}}
 
 {{< code >}}
-  ```index.html
+  ```:index.html
   <img class="logo">
   <p class="paragraph">未加载图片</p>
 

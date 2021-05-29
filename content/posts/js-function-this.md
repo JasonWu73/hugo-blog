@@ -119,7 +119,7 @@ scoreNodeLike(5);
 
 `bind` 方法还常用于事件监听器：
 
-{{< codes js html >}}
+{{< codes index.js index.html >}}
   {{< code >}}
   ```:index.js
   const electronCourse = {
