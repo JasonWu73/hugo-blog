@@ -13,7 +13,7 @@ description: 动态修改 JavaScript 函数中的 this 值
 pinned: true  
 ---
 
-# JavaScript 函数中的 this 值
+> {{<reprint>}}
 
 JS 函数中的 `this` 可被动态修改，这为重用函数提供了极大的灵活性。
 
