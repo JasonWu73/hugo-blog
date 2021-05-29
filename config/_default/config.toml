@@ -1,5 +1,5 @@
 baseURL = "http://121.196.201.221/" # The URL of your site.
-title = "吴仙杰的博客" # Title of your site
+title = "个人技术站点JASONWU" # Title of your site
 theme = "zzo" # Name of Zzo theme folder in `themes/`.
 
 defaultContentLanguage = "zh" # Default language to use (if you setup multilingual)
