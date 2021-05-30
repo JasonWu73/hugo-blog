@@ -17,6 +17,8 @@ pinned: true
 
 {{< param description >}}
 
+## 通用代码片段
+
 ```:index.js
 const jsCourse = {
   subject: 'JavaScript',
