@@ -10,6 +10,7 @@ series:
 title: JavaScript 异步原理：Event Loop
 date: 2021-05-30T19:19:49+08:00
 description: JS 中异步机制的实现方式 - Event Loop。
+pinned: true
 ---
 
 > {{<reprint>}}

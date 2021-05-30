@@ -10,7 +10,6 @@ series:
 title: JavaScript 函数中的 this 值
 date: 2021-05-29T15:25:54+08:00
 description: 动态修改 JS 函数中的 this 值。
-pinned: true  
 ---
 
 > {{< reprint >}}
