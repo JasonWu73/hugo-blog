@@ -71,7 +71,7 @@ description: 理解 JS 中的异步和同步代码。
 {{< /code >}}
 {{< /codes >}}
 
-再比如加载图片也属于异步操作：
+再比如 DOM 加载图片也属于异步操作：
 
 {{< codes index.js index.html >}}
 {{< code >}}
@@ -79,7 +79,7 @@ description: 理解 JS 中的异步和同步代码。
   const img = document.querySelector('.logo');
   const p = document.querySelector('.paragraph');
 
-  // 加载图片是一个异步操作
+  // DOM 加载图片是一个异步操作
   img.src = 'logo.png';
 
   img.addEventListener('load', () => {
@@ -102,12 +102,12 @@ description: 理解 JS 中的异步和同步代码。
 {{< /codes >}}
 
 {{< notice warning "单独的事件监听和回调一样并不能形成异步操作" >}}
-比如监听按钮的 `click` 事件就**不是**一个异步操作！上面之所以是异步，完全是因为加载图片（`img.src = 'logo.png'`）的动作是异步的原因。
+比如监听按钮的 `click` 事件就**不是**一个异步操作！上面之所以是异步，完全是因为 DOM 加载图片（`img.src = 'logo.png'`）的动作是异步的原因。
 {{< /notice >}}
 
 ### JS 中常见的异步操作
 
-- 执行定时器
-- 加载图片
+- 定时器
+- DOM 加载图片
 - 定位 API（Geolocation API）
 - AJAX（**A**synchronous **J**avaScript **A**nd **X**ML）
