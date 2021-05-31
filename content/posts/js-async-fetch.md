@@ -9,9 +9,9 @@ tags:
 - promise
 series:
 - 异步 JavaScript
-title: JavaScript AJAX（使用 Promise）：Fetch API
-date: 2021-05-30T19:11:33+08:00
-description: 通过现代 Fetch API 发送 AJAX 请求，并说明 Promise 的使用方式。
+title: JavaScript AJAX：Fetch API
+date: 2021-05-30T04:36:08+08:00
+description: 通过现代 Fetch API 发送 AJAX 请求。
 ---
 
 > {{<reprint>}}
@@ -25,18 +25,21 @@ description: 通过现代 Fetch API 发送 AJAX 请求，并说明 Promise 的�
 ```js
 const baseUrl = 'https://jsonplaceholder.typicode.com';
 
-const p = fetch(`${baseUrl}/posts/1`); // 立即执行 AJAX，并返回 Promise
+// 立即执行 AJAX，并返回 Promise
+const postPro = fetch(`${baseUrl}/posts/1`);
 
-console.log(p); // Promise {<pending>}
+console.log(postPro); // Promise {<pending>}
 ```
 
-{{< notice info "异步行为的执行与 then 和 catch 无关" >}}
-`then` 和 `catch` 仅仅代表是否使用异步结果，但不会影响异步行为的执行。
+{{< notice info "AJAX 的执行与 then、catch 和 finally 无关" >}}
+`then`、`catch` 和 `finally` 仅仅代表在 AJAX 请求结束后，应该执行什么的操作，而 AJAX 在执行 `fetch` 函数时就已经开始。
 {{< /notice >}}
 
-## then、catch 及 finally 都只返回 Promise
+## 自动装箱 Promise
 
-`then`、`catch` 和 `finally` 函数的返回值都会被自动包装成 Promise，从而支持持续的 Promise 链式调用。比如：
+{{< notice info "自动装箱" >}}
+`then`、`catch` 和 `finally` 函数的返回值全部都会被自动包装成 Promise 对象。
+{{< /notice >}}
 
 ```js
 const baseUrl = 'https://jsonplaceholder.typicode.com';
@@ -48,18 +51,18 @@ fetch(`${baseUrl}/posts/1`)
   .then(() => {
     return '字符串';
   })
-  .then(data => {
-    console.log(data);
+  .then(str => {
+    console.log(str);
 
     throw Error('错误');
   })
   .catch(err => {
-    console.error(err)
+    console.log(err.message)
 
     return '错误已处理';
   })
-  .then(data => {
-    console.log(data);
+  .then(str => {
+    console.log(str);
   })
   .finally(() => {
     console.log('不考虑结果正确与否的代码块2');
@@ -67,22 +70,19 @@ fetch(`${baseUrl}/posts/1`)
 
 // 不考虑结果正确与否的代码块1
 // 字符串
-/*
-Error: 错误
-    at index.js:13
-*/
+// 错误
 // 错误已处理
 // 不考虑结果正确与否的代码块2
 ```
 
-{{< notice info "then、catch 和 finally 是顺序相关的" >}}
-`then`、`catch` 和 `finally` 都代表异步操作执行完毕，从而对结果进行处理：
+{{< notice warning "then、catch 和 finally 是顺序相关的" >}}
+`then`、`catch` 和 `finally` 都代表异步操作执行完成后的操作：
 
 - `then` 处理异步操作行成功后的结果
 - `catch` 处理异步操作执行失败后的结果
-- `finally` 则不考虑异步操作成功还是失败，它仅仅考虑在异步操作经执行完毕后，需要处理的事情
+- `finally` 则不考虑异步操作成功还是失败，仅仅关心在异步操作执行完毕后，需要处理的事情
 
-因 `then`、`catch` 和 `finally` 三者具有相同优先级，故代码编写顺序就显得非常重要了。一般三者在源代码中的顺序为先 `then`，然后 `catch`，最后 `finally`。
+因 `then`、`catch` 和 `finally` 三者具有相同优先级，故代码编写顺序就显得非常重要了。一般三者在源代码中的顺序为先 `then`，再 `catch`，最后 `finally`。
 {{< /notice >}}
 
 ## response.json() 返回 Promise
@@ -93,39 +93,25 @@ Error: 错误
 const baseUrl = 'https://jsonplaceholder.typicode.com';
 
 fetch(`${baseUrl}/posts/1`)
-  .then(response => {
-    const data = response.json();
+  .then(res => {
+    const postPro = res.json();
 
-    console.log(data); // Promise {<pending>}
+    console.log(postPro); // Promise {<pending>}
 
-    return data;
+    return postPro;
   })
-  .then(data => console.log(data));
+  .then(post => console.log(post.id)); // 1
 ```
 
 ## Fetch API 错误机制
 
-{{< notice success "HTTP 服务出错（HTTP 状态码非2xx）不会导致 Fetch API 出错" >}}
-Fetch API 将 HTTP 请求失败也作为 AJAX 请求已经被正确执行来处理，这对请求 RESTful API 是方便的。
-因为在标准的 RESTful API 中，我们不需要关心 HTTP 状态码（仅用于标识请求状态），而只要关心响应体内容（只要请求有到达服务，不论成功与否都会在响应体中体现）。
+{{< notice success "API 服务出错（HTTP 状态码非2xx）不会导致 Fetch API 出错" >}}
+Fetch API 中的 Settled Promise：
+- 只要 HTTP 请求能够发送且响应，那么就是 Fulfilled Promise
+- 只有当丢失网络连接时，才是 Rejected Promise
 {{< /notice >}}
 
-只有一个原因会导致 Fetch API 出错，即丢失网络连接。比如：
-
-```js
-const baseUrl = 'https://jsonplaceholder.typicode.com';
-
-fetch(`${baseUrl}/posts/1`)
-  .then(response => response.json())
-  .then(post => console.log(post))
-  .catch(err => console.error(err.message));
-
-// Failed to fetch
-```
-
-## Fetch API 正确编码方式
-
-Fetch API 的正确写法：
+## Fetch API 使用示例
 
 ```js
 const baseUrl = 'https://jsonplaceholder.typicode.com';
@@ -141,25 +127,29 @@ fetch(`${baseUrl}/posts/`, {
     userId: 101
   })
 })
-  .then(response => response.json())
+  .then(res => {
+    if (!res.ok)
+      throw new Error(`服务出错（${res.status}）`);
+
+    return res.json();
+  })
   .then(post => {
     console.log(post);
 
     return fetch(`${baseUrl}/posts/${post.id}`)
   })
-  .then(response => {
-    // 因 Fetch API 认为 HTTP 请求失败不意味着出错，故需手动抛出错误
-    if (!response.ok)
-      throw new Error(`服务出错（${response.status}）`);
+  .then(res => {
+    if (!res.ok)
+      throw new Error(`服务出错（${res.status}）`);
 
-    return response.json();
+    return res.json();
   })
   .then(data => console.log(data))
-  .catch(err => console.error(err.message))
+  .catch(err => console.error(err.message));
 ```
 
 {{< alert theme="danger" dir="ltr" >}}
-虽然 Promise 可以很优雅地处理异步问题，避免回调地狱（callback hell）。但如果使用方式不当，则同样会出现回调地狱。比如：
+虽然 Promise 可以很优雅地处理异步回调问题，避免回调地狱（callback hell）。但如果使用方式不当，则同样会出现回调地狱。比如：
 
 ```js
 const baseUrl = 'https://jsonplaceholder.typicode.com';
@@ -175,22 +165,26 @@ fetch(`${baseUrl}/posts/`, {
     userId: 101
   })
 })
-  .then(response => response.json())
+  .then(res => {
+    if (!res.ok)
+      throw new Error(`服务出错（${res.status}）`);
+
+    return res.json();
+  })
   .then(post => {
     console.log(post);
 
-    // 错误的使用方式，出现回调地狱
     fetch(`${baseUrl}/posts/${post.id}`)
-      .then(response => {
-        // 因 Fetch API 认为 HTTP 请求失败不意味着出错，故需手动抛出错误
-        if (!response.ok)
-          throw new Error(`服务出错（${response.status}）`);
+      .then(res => {
+        if (!res.ok)
+          throw new Error(`服务出错（${res.status}）`);
 
-        return response.json();
+        return res.json();
       })
       .then(data => console.log(data))
-      .catch(err => console.error(err.message))
+      .catch(err => console.error(err.message));
   })
-  .catch(err => console.error(err.message))
+  .then(data => console.log(data))
+  .catch(err => console.error(err.message));
 ```
 {{< /alert >}}
