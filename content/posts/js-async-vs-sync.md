@@ -8,9 +8,9 @@ tags:
 - sync
 series:
 - 异步 JavaScript
-title: JavaScript 中的异步和同步代码
+title: JavaScript 异步 vs 同步
 date: 2021-05-29T21:08:21+08:00
-description: 理解 JS 中的异步和同步代码。
+description: 直观感受 JS 中的异步和同步的区别。
 ---
 
 > {{<reprint>}}
@@ -20,9 +20,9 @@ description: 理解 JS 中的异步和同步代码。
 ## 同步代码
 
 - 代码按顺序一行一行执行
-- **阻塞式**，即当执行耗时操作时，同步代码只有在该耗时操作完成后才能继续执行
+- 当执行耗时操作时，后续代码只能等待当前代码执行完成后才能执行
 
-比如同步函数 `alert`：
+同步 `alert`：
 
 {{< codes index.js index.html >}}
   {{< code >}}
@@ -45,11 +45,11 @@ description: 理解 JS 中的异步和同步代码。
 
 ## 异步代码
 
-- 只会在"后台"任务执行完毕后执行
-- **非阻塞式**，即后续代码不会等待异步代码执行完毕后再执行。实际的效果就是，仿佛直接跳过了异步代码，继续执行后续代码
+- 只会在“后台”任务执行完成后执行
+- **非阻塞式**，即后续代码不会等待异步代码执行完成后再执行。实际的效果就是，仿佛直接跳过了异步代码
 - 虽然异步是通过回调函数实现的，但单独的回调函数不会自动变为异步执行。比如 `[1, 2, 3].map(v => v * 2)` 仍然是同步代码
 
-比如异步函数 `setTimeout`：
+异步 `setTimeout`：
 
 {{< codes index.js index.html >}}
 {{< code >}}
@@ -102,12 +102,12 @@ description: 理解 JS 中的异步和同步代码。
 {{< /codes >}}
 
 {{< notice warning "单独的事件监听和回调一样并不能形成异步操作" >}}
-比如监听按钮的 `click` 事件就**不是**一个异步操作！上面之所以是异步，完全是因为 DOM 是异步加载图片（`img.src = 'logo.png'`）的原因。
+比如按钮的 `click` 事件就**不是**一个异步操作！上面之所以是异步，完全是因为 DOM 是异步加载图片（`img.src = 'logo.png'`）的原因。
 {{< /notice >}}
 
 ### JS 中常见的异步操作
 
-- 定时器
+- 定时器（`setTimeout`、`setInterval`）
 - DOM 加载图片
 - 定位 API（Geolocation API）
 - AJAX（**A**synchronous **J**avaScript **A**nd **X**ML）

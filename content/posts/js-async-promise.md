@@ -9,7 +9,7 @@ tags:
 series:
 - 异步 JavaScript
 title: JavaScript 构建 Promise
-date: 2021-05-30T04:36:08+08:00
+date: 2021-05-30T19:11:33+08:00
 description: 通过 Promise 优化旧的 JS 异步 API。
 ---
 
@@ -17,10 +17,10 @@ description: 通过 Promise 优化旧的 JS 异步 API。
 
 {{< param description >}}
 
-## 何为 Promise
+## 介绍 Promise
 
 Promise
-: 一个包含异步操作结果的占位符对象。
+: 一个包含异步操作结果（将来结果）的占位符对象。
 
 Promise 的优点：
 
@@ -29,13 +29,13 @@ Promise 的优点：
 
 Promise 生命周期：
 
-1. Pending：构建 Promise 对象时的初始状态，此时异步任务会立即在后台运行
+1. Pending：构建 Promise 对象时的初始状态，内部还是立即执行的同步代码
     - `new Promise()`
 2. Settled：异步任务执行完毕
     - Fulfilled：异步任务执行成功，且结果可用
         - `then()`
     - Rejected：异步任务执行失败，即发生了错误
-        - `then()` 或 `catch()`
+        - `then(onFulfilled[, onRejected])` 或 `catch()`
 
 ## 构建 Promise
 
@@ -44,42 +44,67 @@ Promise 是一个特殊的对象，接收一个执行器（executor）函数，�
 1. `resolve`：代表处理成功时的回调函数
 2. `reject`：代表处理失败时的回调函数
 
-比如：
-
 ```js
-const lotteryPromise = new Promise((resolve, reject) => {
-  console.log('彩票开奖中...');
-
-  setTimeout(() => {
-    if (Math.random() >= 0.5) {
+const lotteryPro = new Promise((resolve, reject) => {
+   if (Math.random() >= 0.5) {
       resolve('恭喜，您中奖啦！！！');
-    } else {
+   } else {
       reject(new Error('很遗憾，您未中奖'));
-    }
-  }, 2000)
+   }
 });
 
-lotteryPromise
-  .then(result => console.log(result))
-  .catch(err => console.error(err));
+lotteryPro
+        .then(res => console.log(res))
+        .catch(err => console.error(err.message));
 ```
 
-此外，还可以使用 `Promise.resolve` 或 `Promise.reject` 来构建立即执行的 Promise：
+此外，还可以使用 `Promise.resolve` 或 `Promise.reject` 来构建立即执行的 Promise。
 
 ```js
-Promise.resolve('结果').then(result => console.log(result));
+Promise.resolve('结果').then(res => console.log(res));
 
-Promise.reject(new Error('错误')).then(err => console.error(err));
+Promise.reject(new Error('错误'))
+  .catch(err => console.error(err.message));
+```
+
+## Promise ≠ 异步
+
+{{< notice warning "Promise 不等于异步" >}}
+Promise 不能也不会自动将同步代码转为异步代码，它的作用仅仅是包装异步代码，从而使异步代码变得更易用且更优雅而已。
+{{< /notice >}}
+
+```js
+const startMilli = Date.now();
+console.log(`1：开始执行`);
+
+// Promise 不能也不会将同步代码转换为异步代码
+new Promise(resolve => {
+   // 假设正在运行一段耗时代码
+   const start = Date.now();
+
+   while (Date.now() - start <= 2000) {
+      // 模拟2秒耗时操作
+   }
+
+   resolve('2秒 Promise');
+})
+        .then(data => console.log(data));
+
+// 该代码会被阻塞2秒
+const duration = Math.trunc((Date.now() - startMilli) / 1000);
+console.log(`2：结束执行，耗时：${duration}秒`);
+
+// 1：开始执行
+// 2：结束执行，耗时：2秒
+// 2秒 Promise
 ```
 
 ## Promisifying
 
 Promisifying
-: 将基于回调的异步代码转换为基于 Promise 的行为。
+: 将基于回调的异步代码转换为基于 Promise 的异步代码。
 
 ### setTimeout
-
-对 `setTimeout` 执行 Promisifying：
 
 ```js
 // 因为 `setTimeout` 不会返回错误，故只需要 `resolve` 即可
@@ -134,28 +159,25 @@ setTimeout(() => {
 
 ### Geolocation
 
-对 Geolocation API 执行 Promisifying：
-
 ```js
 navigator.geolocation.getCurrentPosition(
-  position => console.log(position),
-  err => console.error(err));
+  pos => console.log(pos),
+  err => console.error(err.message)
+);
 
 // Promisifying
-const geoPromise = new Promise((resolve, reject) => {
-  navigator.geolocation.getCurrentPosition(resolve, reject);
+const geoPro = new Promise((resolve, reject) => {
+   navigator.geolocation.getCurrentPosition(resolve, reject);
 });
 
-geoPromise
-  .then(position => console.log(position))
-  .catch(err => console.error(err));
+geoPro
+  .then(pos => console.log(pos))
+  .catch(err => console.error(err.message));
 
 console.log('获取位置');
 ```
 
 ### DOM 加载图片
-
-对 DOM 加载图片执行 Promisifying：
 
 ```js
 const body = document.querySelector('body');
@@ -189,34 +211,7 @@ createImage('j.png')
   .then(img => {
     body.insertAdjacentElement('afterbegin', img);
   })
-  .catch(err => console.error(err));
+  .catch(err => console.error(err.message));
 
 console.log('DOM 开始加载图片');
-```
-
-## Promise 不能将同步转为异步
-
-Promise 本身是同步的，它不能将同步代码转为异步代码，它的作用仅仅是包装异步代码，从而使得异步代码变得更易用且更优雅而已。
-
-比如下面的 Promise 同样会阻塞代码运行：
-
-```js
-// Promise 不能也不会将同步代码转换为异步代码
-new Promise(resolve => {
-   // 假设正在运行一段耗时代码
-   const start = Date.now();
-
-   while (Date.now() - start <= 2000) {
-      // 模拟2秒耗时操作
-   }
-
-   resolve('2秒 Promise');
-})
-  .then(data => console.log(data));
-
-// 该代码会被阻塞2秒
-console.log('同步代码');
-
-// 同步代码
-// 2秒 Promise
 ```

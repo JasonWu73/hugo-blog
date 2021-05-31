@@ -83,7 +83,7 @@ jsCourse.score.apply(nodeCourse, [true, 5]);
 
 {{< alert theme="info" dir="ltr" >}}
 `apply` 和 [`call`]({{< relref "#functionprototypecall" >}}) 除了第二个参数不同外，其他没有任何区别。
-在现代 JS（从 ES 2015 开始）中已很少使用 `apply`，因为通过 [Spread 语法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)可以统一代码，全部使用 `call` 方法。
+现代 JS（从 ES 2015 开始）已很少使用 `apply`，因为通过 [Spread 语法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)可很方便地使用 `call` 方法作为代替。
 
 ```:index.js
 jsCourse.score.call(nodeCourse, ...[true, 5]);
@@ -134,8 +134,9 @@ scoreNodeLike(5);
     }
   }
 
-  document.querySelector('.btn-like')
-    .addEventListener('click', electronCourse.like.bind(electronCourse));
+  document.querySelector('.btn-like').addEventListener(
+    'click', electronCourse.like.bind(electronCourse)
+  );
   // Object {subject: "Electron", likes: 0, like: ƒ}
   // Electron，点赞数 👍：1
   ```
