@@ -103,10 +103,12 @@ fetch(`${baseUrl}/posts/1`)
   .then(data => console.log(data));
 ```
 
-## Fetch API 何时会出错
+## Fetch API 错误机制
 
+{{< notice success "HTTP 请求错误（HTTP 状态码非2xx）不会导致 Fetch API 出错" >}}
 Fetch API 将 HTTP 请求失败也作为 AJAX 请求已经被正确执行来处理，这对请求 RESTful API 是方便的。
 因为在标准的 RESTful API 中，我们不需要关心 HTTP 状态码（仅用于标识请求状态），而只要关心响应体内容（只要请求有到达服务，不论成功与否都会在响应体中体现）。
+{{< /notice >}}
 
 只有一个原因会导致 Fetch API 出错，即丢失网络连接。比如：
 
