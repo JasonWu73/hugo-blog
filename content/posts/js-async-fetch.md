@@ -9,9 +9,9 @@ tags:
 - promise
 series:
 - 异步 JavaScript
-title: JavaScript AJAX 调用：Fetch API 与 Promise
+title: JavaScript AJAX（使用 Promise）：Fetch API
 date: 2021-05-30T19:11:33+08:00
-description: JS 现代 AJAX 调用方式 Fetch API，以前 Promise 消费方式。
+description: 通过现代 Fetch API 发送 AJAX 请求，并说明 Promise 的使用方式。
 ---
 
 > {{<reprint>}}

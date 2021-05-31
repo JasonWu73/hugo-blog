@@ -8,9 +8,9 @@ tags:
 - xhr
 series:
 - 异步 JavaScript
-title: JavaScript AJAX 调用：XMLHttpRequest
+title: JavaScript AJAX：XMLHttpRequest
 date: 2021-05-30T04:25:52+08:00
-description: JS 早期 AJAX 调用方式 XMLHttpRequest 对象。
+description: 通过早期 XMLHttpRequest 对象发送 AJAX 请求。
 ---
 
 > {{<reprint>}}
