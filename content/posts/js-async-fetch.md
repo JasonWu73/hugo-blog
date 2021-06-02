@@ -32,7 +32,7 @@ console.log(postPro); // Promise {<pending>}
 ```
 
 {{< notice info "AJAX 的执行与 then、catch 和 finally 无关" >}}
-`then`、`catch` 和 `finally` 仅仅代表在 AJAX 请求结束后，应该执行什么的操作，而 AJAX 在执行 `fetch` 函数时就已经开始。
+`then`、`catch` 和 `finally` 仅仅代表在 AJAX 请求结束后，应该执行什么的操作，而 AJAX 在调用 `fetch` 函数时就已经开始执行了。
 {{< /notice >}}
 
 ## 自动装箱 Promise
@@ -82,7 +82,7 @@ fetch(`${baseUrl}/posts/1`)
 - `catch` 处理异步操作执行失败后的结果
 - `finally` 则不考虑异步操作成功还是失败，仅仅关心在异步操作执行完毕后，需要处理的事情
 
-因 `then`、`catch` 和 `finally` 三者具有相同优先级，故代码编写顺序就显得非常重要了。一般三者在源代码中的顺序为先 `then`，再 `catch`，最后 `finally`。
+<br>因 `then`、`catch` 和 `finally` 三者具有相同优先级，故代码顺序非常重要。一般都为先 `then`，再 `catch`，最后 `finally`。
 {{< /notice >}}
 
 ## response.json() 返回 Promise

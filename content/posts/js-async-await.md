@@ -19,8 +19,8 @@ description: ES2017 为简化 Promise 使用，引入了 async/await 关键字�
 
 ## 以同步写异步
 
-{{< notice info "async/await 仅仅是语法糖" >}}
-`async`/`await` 并没有为 JS 提供新特性，仅仅是为 Promise 提供了一种更易写易懂的语法。
+{{< notice info "语法糖" >}}
+`async`/`await` 并没有为 JS 添加新特性，仅仅是为 Promise 提供了一种更易写易懂的语法。
 {{< /notice >}}
 
 ```js

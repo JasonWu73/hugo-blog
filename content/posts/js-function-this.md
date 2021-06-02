@@ -82,8 +82,7 @@ jsCourse.score.apply(nodeCourse, [true, 5]);
 ```
 
 {{< alert theme="info" dir="ltr" >}}
-`apply` 和 [`call`]({{< relref "#functionprototypecall" >}}) 除了第二个参数不同外，其他没有任何区别。
-现代 JS（从 ES 2015 开始）已很少使用 `apply`，因为通过 [Spread 语法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)可很方便地使用 `call` 方法作为代替。
+`apply` 和 [`call`]({{< relref "#functionprototypecall" >}}) 除了第二个参数不同外，其他没有任何区别。也可通过 [Spread 语法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)使用 `call` 代替：
 
 ```:index.js
 jsCourse.score.call(nodeCourse, ...[true, 5]);
@@ -154,8 +153,7 @@ scoreNodeLike(5);
 {{< /codes >}}
 
 {{< alert theme="danger" dir="ltr" >}}
-由于事件处理函数会绑定自己的 this 值。
-因此下面代码是**错误**的，其中 `this` 的值为 *HTML Button 元素*。
+由于事件处理函数会绑定自己的 this 值。因此下面代码是**错误**的，其中 `this` 的值为 *HTML Button 元素*。
 
 ```:index.js
 document.querySelector('.btn-like')

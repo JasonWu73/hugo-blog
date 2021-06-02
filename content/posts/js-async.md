@@ -19,24 +19,26 @@ pinned: true
 
 ## 原理
 
-{{< img src="/images/posts/js_async_diagram.jpg" title="JS 异步机制" caption="JS 运行时环境" alt="JS 运行时环境" position="center" >}}
+{{< img src="/images/posts/js_async_runtime.jpg" title="JS 异步机制" caption="JS 运行时环境" alt="JS 运行时环境" position="center" >}}
 
 {{< notice info "回调队列 vs 微任务队列" >}}
 微任务队列和回调队列唯一的不同点在于执行优先级，其中微任务队列拥有更高的优先级，故回调队列可能会出现 starve。
 因为微任务队列和回调队列的代码都是来自于回调函数，故下文在非必要情况下，全部以回调队列作为讲解。
 {{< /notice >}}
 
-Event Loop
+<br>Event Loop
 : 负责协调除程序开始运行时，即全局执行上下文（Global Execution Context）以外的整个 JS 执行过程，并决定每个回调应该在何时被执行。
 
-Event Loop Tick
+<br>Event Loop Tick
 : 当 Call Stack 为空，Event Loop 将回调队列的第一个回调放入 Call Stack 执行。
 
+<br>
 {{< notice info "回调队列" >}}
 回调队列中的回调函数既可以来自异步代码，也可以来自同步代码（比如 DOM 事件：`click`、`keydown` 等）。
 {{< /notice >}}
 
-JS 引擎对时间是无感知的，因为异步根本不发生在 JS 引擎中，什么时间执行什么代码全部都由 Event Loop 决定，JS 引擎（单线程）只负责执行 Event Loop 交给它的代码而已。
+<br>JS 引擎对时间是无感知的，因为异步根本不发生在 JS 引擎中，什么时间执行什么代码全部都由 Event Loop 决定，JS 引擎（单线程）只负责执行 Event Loop 交给它的代码而已。
+
 简而言之，浏览器的 Web API 环境、回调队列以及 Event Loop 这些一起才实现了单线程 JS 引擎的非阻塞机制。
 
 ## 示例：DOM 加载图片

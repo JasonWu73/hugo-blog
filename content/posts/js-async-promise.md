@@ -22,12 +22,12 @@ description: 通过 Promise 优化旧的 JS 异步 API。
 Promise
 : 一个包含异步操作结果（将来结果）的占位符对象。
 
-Promise 的优点：
+<br>Promise 的优点：
 
 - 无需依赖将事件和回调传递给异步函数，就可以处理异步结果
 - 可为一系列异步操作提供 Promise 链式调用，从而避免回调地狱（callback hell）
 
-Promise 生命周期：
+<br>Promise 生命周期：
 
 1. Pending：构建 Promise 对象时的初始状态，内部还是立即执行的同步代码
     - `new Promise()`
@@ -70,7 +70,7 @@ Promise.reject(new Error('错误'))
 ## Promise ≠ 异步
 
 {{< notice warning "Promise 不等于异步" >}}
-Promise 不能也不会自动将同步代码转为异步代码，它的作用仅仅是包装异步代码，从而使异步代码变得更易用且更优雅而已。
+Promise 不会也不能将同步代码转为异步代码，它的作用仅仅是包装异步代码，从而使得异步编码方式更加优雅，并使异步代码支持 [Async/Await 关键字]({{< relref "/posts/js-async-vs-sync" >}})。
 {{< /notice >}}
 
 ```js
