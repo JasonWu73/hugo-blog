@@ -216,6 +216,10 @@ const getPost = async (postId) => {
 
 ### Promise.race()
 
+{{< notice info "忽略的变量" >}}
+约定俗成：以 `_` 作为被忽略的变量名称，即表示在上下文中不需要的变量。
+{{< /notice >}}
+
 ```js
 const getPost = async (postId) => {
   const baseUrl = 'https://jsonplaceholder.typicode.com';
@@ -225,6 +229,7 @@ const getPost = async (postId) => {
 };
 
 const timeout = sec => new Promise((_, reject) => {
+  // 约定俗成：以 `_` 表示被忽略的变量
   setTimeout(() => reject(new Error(`请求超时${sec}秒`)), sec * 1000);
 });
 
@@ -289,6 +294,7 @@ const getPost = async (postId) => {
 };
 
 const timeout = sec => new Promise((_, reject) => {
+  // 约定俗成：以 `_` 表示被忽略的变量
   setTimeout(() => reject(new Error(`请求超时${sec}秒`)), sec * 1000);
 });
 

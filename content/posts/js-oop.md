@@ -18,7 +18,7 @@ description: JS 中实现 OOP（Object-Oriented Programming）的原理及方式
 
 ## 原型继承
 
-JS 中的 OOP 与 Java、Python 不同，JS 中没有真正意义上类的这个概念，它是通过原型（Prototype）实现面向对象的继承。
+JS 中的 OOP 与 Java 不同，JS 中没有真正意义上的类，它是通过原型（Prototype）实现 OOP 的。
 
 {{< notice success "面向对象的四大基本特征" >}}
 抽象（Abstraction）、封装（Encapsulation）、继承（Inheritance）和多态（Polymorphism）在 JS OOP 中和其他语言没有任何区别。
@@ -29,13 +29,13 @@ JS 中的 OOP 与 Java、Python 不同，JS 中没有真正意义上类的这个
 
 <br>JS 中实现原型继承有三种方式：
 
-- 构造函数
+- [构造函数]({{< relref "#构造函数" >}})
     - 使用普通函数创建对象，然后指定原型
     - JS 最早实现 OOP 的方式
 - [ES6 Class]({{< relref "/posts/js-oop-class" >}})
     - 现代 JS 创建对象的方式，但它仅仅是构造函数的“语法糖”
-- `Object.create()`
-    - 将现有对象作为原型对象，从而创建一个新对象
+- [`Object.create()`]({{< relref "#objectcreate" >}})
+    - 将现有对象作为原型对象，从而创建一个新对象（空对象 `{}`）
 
 ## 构造函数
 
@@ -80,7 +80,7 @@ User.prototype.type = '测试用户';
 
 User.prototype.sayHi = function () {
   console.log(`你好，${this.name}`);
-}
+};
 
 const jason = new User('Jason', 25);
 
@@ -123,7 +123,7 @@ console.dir(document.querySelector('body'));
 
 <br>{{< img src="/images/posts/js_prototype_chain.jpg" title="JS 原型链" caption="示例图" alt="JS 原型链示例图" position="center" >}}
 
-### 静态方法
+### 静态属性和方法
 
 ```js
 const User = function (name, age) {
@@ -145,4 +145,106 @@ console.log(jason.version); // undefined
 
 console.log(User.version); // v1.0.0
 User.info(); // User，开发者：Jason Wu，版本：v1.0.0
+```
+
+### 继承与多态
+
+```js
+const User = function (name, age) {
+  this.name = name;
+  this.age = age;
+};
+
+User.prototype.sayHi = function () {
+  console.log(`你好，${this.name}`);
+};
+
+const Vip = function (name, age, level) {
+  // 1. 使用父类构造函数
+  User.call(this, name, age);
+
+  this.level = level;
+};
+
+// 2. 链接原型对象
+Vip.prototype = Object.create(User.prototype);
+
+// 3. 修正原型对象的构造函数
+// console.log(Vip.prototype.constructor); // `User` 函数
+Vip.prototype.constructor = Vip;
+// console.log(Vip.prototype.constructor); // `Vip` 函数
+
+Vip.prototype.sayHi = function () {
+  console.log(`用户：${this.name}，VIP 等级：${this.level}`);
+};
+
+const jason = new Vip('Jason', 25, '3');
+
+jason.sayHi(); // 用户：Jason，VIP 等级：3
+
+// 检查原型链
+console.log(jason instanceof Vip); // true
+console.log(jason instanceof User); // true
+console.log(jason instanceof Object); // true
+```
+
+## Object.create()
+
+```js
+const userProto = {
+  init(name, age) {
+    this.name = name;
+    this.age = age;
+  },
+
+  sayHi() {
+    console.log(`你好，${this.name}`);
+  }
+};
+
+// 使用已有对象为原型对象从而创建一个新的空对象
+const jason = Object.create(userProto);
+
+jason.init('Jason', 25);
+jason.sayHi(); // 你好，Jason
+
+// 检查原型对象
+console.log(jason.__proto__ === userProto); // true
+```
+
+### 继承与多态
+
+```js
+const userProto = {
+  init(name, age) {
+    this.name = name;
+    this.age = age;
+  },
+
+  sayHi() {
+    console.log(`你好，${this.name}`);
+  }
+};
+
+// 1. 创建新的原型对象
+const vipProto = Object.create(userProto);
+
+vipProto.init = function (name, age, level) {
+  // 2. 使用父类构造函数
+  userProto.init.call(this, name, age);
+
+  this.level = level;
+}
+
+vipProto.sayHi = function () {
+  console.log(`用户：${this.name}，VIP 等级：${this.level}`);
+};
+
+const jason = Object.create(vipProto);
+
+jason.init('Jason', 25, 3);
+jason.sayHi(); // 用户：Jason，VIP 等级：3
+
+// 检查原型链
+console.dir(jason);
 ```
