@@ -7,7 +7,7 @@ tags:
 - async
 - promise
 series:
-- 异步 JavaScript
+- JavaScript Async
 title: JavaScript 构建 Promise
 date: 2021-05-30T19:11:33+08:00
 description: 通过 Promise 优化旧的 JS 异步 API。

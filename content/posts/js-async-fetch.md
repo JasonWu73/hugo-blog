@@ -8,7 +8,7 @@ tags:
 - xhr
 - promise
 series:
-- 异步 JavaScript
+- JavaScript Async
 title: JavaScript AJAX：Fetch API
 date: 2021-05-30T04:36:08+08:00
 description: 通过现代 Fetch API 发送 AJAX 请求。

@@ -7,7 +7,7 @@ tags:
 - async
 - xhr
 series:
-- 异步 JavaScript
+- JavaScript Async
 title: JavaScript AJAX：XMLHttpRequest
 date: 2021-05-30T04:25:52+08:00
 description: 通过早期 XMLHttpRequest 对象发送 AJAX 请求。

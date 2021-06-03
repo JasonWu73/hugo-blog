@@ -2,9 +2,11 @@
 author: 吴仙杰
 authorEmoji: 🧑🏻‍💻
 categories:
-- 网络
+- Network
 tags:
 - http
+series:
+- HTTP(S)
 title: HTTP 请求与响应报文格式
 date: 2021-05-30T03:47:01+08:00
 description: HTTP 请求报文和 HTTP 响应报文格式。

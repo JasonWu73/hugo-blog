@@ -7,7 +7,7 @@ tags:
 - async
 - promise
 series:
-- 异步 JavaScript
+- JavaScript Async
 title: JavaScript 使用 Promise：Async/Await
 date: 2021-05-31T04:47:29+08:00
 description: ES2017 为简化 Promise 使用，引入了 async/await 关键字，配合 Promise Combinator 可优雅地解决 JS 中所有异步问题。

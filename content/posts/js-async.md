@@ -6,7 +6,7 @@ categories:
 tags:
 - async
 series:
-- 异步 JavaScript
+- JavaScript Async
 title: JavaScript 异步原理：Event Loop
 date: 2021-05-30T19:19:49+08:00
 description: 详解 JS 异步机制实现。

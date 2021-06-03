@@ -7,7 +7,7 @@ tags:
 - async
 - sync
 series:
-- 异步 JavaScript
+- JavaScript Async
 title: JavaScript 异步 vs 同步
 date: 2021-05-29T21:08:21+08:00
 description: 直观感受 JS 中的异步和同步的区别。
