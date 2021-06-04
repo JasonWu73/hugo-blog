@@ -53,7 +53,7 @@ whoami = "全栈开发"
 bioImageUrl = "" # image url like "http//..." or "images/anyfoldername/mybioimage.jpg" If not set, we find a avatar image in root/static/images/whoami/avatar.(png|jpg|svg)
 useGravatar = false # we use this option highest priority
 location = "杭州，浙江"
-organization = "杭州乾冠"
+organization = "浙江乾冠"
 link = "http://www.wuxianjie.net"
 
 # sidebar
