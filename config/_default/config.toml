@@ -9,7 +9,7 @@ hasCJKLanguage = true # Set `true` for Chinese/Japanese/Korean languages.
 summaryLength = 70 # The length of a post description on a list page.
 buildFuture = true # if true, we can use future date for talks page
 
-copyright = "© 2021-{year} 吴仙杰 版权所有<br><a href=\"https://beian.miit.gov.cn/\" target=\"_blank\">浙ICP备2021017187号-1</a>" # copyright symbol: $copy; current year: {year}
+copyright = "© 2021-{year} 吴仙杰 版权所有<div style=\"font-size: .8rem;\"><a href=\"https://beian.miit.gov.cn/\" target=\"_blank\">浙ICP备2021017187号-1</a></div>" # copyright symbol: $copy; current year: {year}
 timeout = 10000
 enableEmoji = true
 paginate = 13 # Number of items per page in paginated lists.
