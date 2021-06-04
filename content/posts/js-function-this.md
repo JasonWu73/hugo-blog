@@ -49,9 +49,7 @@ const nodeCourse = {
 ```js
 call()
 call(thisArg)
-call(thisArg, arg1)
-call(thisArg, arg1, arg2)
-call(thisArg, arg1, ... , argN)
+call(thisArg, arg1, ..., argN)
 ```
 
 示例：
@@ -95,9 +93,7 @@ jsCourse.score.call(nodeCourse, ...[true, 5]);
 
 ```js
 bind(thisArg)
-bind(thisArg, arg1)
-bind(thisArg, arg1, arg2)
-bind(thisArg, arg1, ... , argN)
+bind(thisArg, arg1, ..., argN)
 ```
 
 示例：

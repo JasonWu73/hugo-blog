@@ -19,7 +19,7 @@ description: ES6 Class - 现代 JS OOP 语法糖及新增特性。
 ## ES6 Class 特点
 
 - 仅仅是[构造函数]({{< relref "/posts/js-oop#构造函数" >}})的语法糖
-- 不会 hoisted
+- 不会 Hoisted
 - 是 First Class Citizen，即类可以被当成参数使用
 - Class Body 永远都只在 Strict Mode（`'use strict';`）下执行
 
@@ -30,7 +30,7 @@ description: ES6 Class - 现代 JS OOP 语法糖及新增特性。
 - 类表达式（Class Expression）
 - 类声明（Class Declaration）
   
-<br>但与函数不同的是：类声明**不会** hoisted！
+<br>但与函数不同的是：类声明**不会** Hoisted！
 
 ```js
 // 类声明
