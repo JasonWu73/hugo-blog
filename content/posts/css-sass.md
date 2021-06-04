@@ -9,7 +9,7 @@ series:
 - CSS Samples
 title: Sass 7-1 Pattern
 date: 2021-06-03T15:01:57+08:00
-description: Sass 目录结构设计与 CSS 样式代码。
+description: Sass 目录结构设计与 CSS 通用样式代码。
 ---
 
 > {{<reprint>}}
@@ -98,7 +98,7 @@ $color-grey: #e3e3e3;
 
 ```scss:sass/abstracts/_helpers.scss
 .hidden {
-  display: none;
+  display: none !important;
 }
 ```
 

@@ -9,7 +9,7 @@ series:
 - JavaScript OOP
 title: JavaScrip OOP：ES6 Class
 date: 2021-06-01T18:46:24+08:00
-description: ES6 Class - 现代 JS OOP 语法糖及新增特性。
+description: 现代 JS OOP 语法糖及新特性。
 ---
 
 > {{<reprint>}}

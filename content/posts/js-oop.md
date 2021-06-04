@@ -7,9 +7,10 @@ tags:
 - oop
 series:
 - JavaScript OOP
-title: JavaScript OOP：必知必会
+title: JavaScript OOP：原型链
 date: 2021-06-01T15:42:47+08:00
-description: JS 中实现 OOP（Object-Oriented Programming）的原理及方式。
+description: 详解 JS OOP（Object-Oriented Programming）实现原理及方式。
+pinned: true
 ---
 
 > {{<reprint>}}

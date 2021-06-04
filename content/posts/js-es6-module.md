@@ -9,7 +9,7 @@ series:
 - JavaScript Docs
 title: JavaScript ES6 模块
 date: 2021-06-04T12:34:38+08:00
-description: ES6 为 JS 引入了原生模块支持。
+description: JS 原生模块生态系统。
 ---
 
 > {{<reprint>}}
