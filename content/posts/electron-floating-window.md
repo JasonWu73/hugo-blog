@@ -22,24 +22,24 @@ description: 创建一个支持内容切换及拖拽的悬浮窗。
 ```
 .
 ├── main
-│   ├── floating_window.js
-│   └── main.js
-├── package-lock.json
-├── package.json
+│   ├── floating-window.js
 ├── renderer
-│   ├── floating_window.html
+│   ├── floating-window.html
 │   ├── img
 │   │   └── logo.png
 │   └── style.css
-└── sass
-    ├── abstracts
-    │   ├── _mixins.scss
-    │   └── _variables.scss
-    ├── base
-    │   └── _base.scss
-    ├── main.scss
-    └── pages
-        └── floating_window.scss
+├── sass
+│   ├── abstracts
+│   │   ├── _mixins.scss
+│   │   └── _variables.scss
+│   ├── base
+│   │   └── _base.scss
+│   ├── main.scss
+│   └── pages
+│       └── floating-window.scss
+├── main.js
+├── package.json
+└── package-lock.json
 ```
 
 ## NPM
@@ -49,7 +49,7 @@ description: 创建一个支持内容切换及拖拽的悬浮窗。
   "name": "demo",
   "version": "1.0.0",
   "description": "",
-  "main": "main/main.js",
+  "main": "main.js",
   "scripts": {
     "start": "electron .",
     "watch": "nodemon --exec electron .",
@@ -72,14 +72,14 @@ description: 创建一个支持内容切换及拖拽的悬浮窗。
 ```:main/main.js
 const { app } = require('electron');
 
-const FloatingWindow = require('./floating_window');
+const FloatingWindow = require('./floating-window');
 
 app.whenReady().then(() => {
   new FloatingWindow({ dev: true });
 });
 ```
 
-```:main/floating_window.js
+```:main/floating-window.js
 const { BrowserWindow, ipcMain } = require('electron');
 
 class FloatingWindow {
@@ -110,7 +110,7 @@ class FloatingWindow {
       }
     });
 
-    this.win.loadFile('renderer/floating_window.html').then(() => {
+    this.win.loadFile('renderer/floating-window.html').then(() => {
       this.#toggleMain();
     });
 
@@ -135,7 +135,7 @@ module.exports = FloatingWindow;
 
 ## 渲染器进程
 
-```:renderer/floating_window.html
+```:renderer/floating-window.html
 <!DOCTYPE html>
 <html>
   <head>
@@ -230,7 +230,7 @@ img {
   @include no-drag;
 }
 ```
-```:sass/pages/_floating_window.scss
+```:sass/pages/_floating-window.scss
 @use '../abstracts/variables' as *;
 
 .f_win {
@@ -256,5 +256,5 @@ img {
 
 @use 'base/base';
 
-@use './pages/floating_window';
+@use './pages/floating-window';
 ```
