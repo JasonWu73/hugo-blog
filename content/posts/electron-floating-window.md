@@ -146,18 +146,18 @@ module.exports = FloatingWindow;
     <title>悬浮窗</title>
   </head>
   <body style="-webkit-app-region: drag">
-    <div class="f_win">
-      <img class="f_win__logo" src="img/logo.png">
-      <div class="f_win__tip hidden">双点切换</div>
+    <div class="f-win">
+      <img class="f-win__logo" src="img/logo.png">
+      <div class="f-win__tip hidden">双点切换</div>
     </div>
 
     <script>
       const { ipcRenderer } = require('electron');
 
       class FloatingWindow {
-        container = document.querySelector('.f_win');
-        logo = document.querySelector('.f_win__logo');
-        tip = document.querySelector('.f_win__tip');
+        container = document.querySelector('.f-win');
+        logo = document.querySelector('.f-win__logo');
+        tip = document.querySelector('.f-win__tip');
 
         constructor() {
           this.#handleDoubleClick();
@@ -233,7 +233,7 @@ img {
 ```:sass/pages/_floating-window.scss
 @use '../abstracts/variables' as *;
 
-.f_win {
+.f-win {
   height: 100vh;
   background-color: $color-primary;
   display: flex;

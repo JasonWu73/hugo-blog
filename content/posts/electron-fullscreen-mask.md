@@ -20,7 +20,7 @@ description: 创建透明的全屏遮罩。
 const { app, BrowserWindow, screen } = require('electron');
 
 class Main {
-  mainWindow;
+  win;
 
   constructor() {
 
@@ -33,7 +33,7 @@ class Main {
   _createWindow() {
     const { width, height, x, y } = screen.getPrimaryDisplay().bounds;
 
-    this.mainWindow = new BrowserWindow({
+    this.win = new BrowserWindow({
       width,
       height,
       x,
@@ -49,10 +49,10 @@ class Main {
       }
     });
 
-    this.mainWindow.loadFile('renderer/index.html');
+    this.win.loadFile('renderer/index.html');
 
     // 使覆盖全屏幕，包含系统任务栏
-    this.mainWindow.setAlwaysOnTop(true, 'screen-saver');
+    this.win.setAlwaysOnTop(true, 'screen-saver');
   }
 
   _adjustForMacOs() {
