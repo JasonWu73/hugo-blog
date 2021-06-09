@@ -9,7 +9,7 @@ series:
 - Electron Samples
 title: Electron 全屏遮罩
 date: 2021-06-08T18:34:37+08:00
-description: 创建透明的全屏遮罩。
+description: 创建透明的全屏遮罩，包含 MacOS Menu Bar。
 ---
 
 > {{<reprint>}}
@@ -23,10 +23,9 @@ class Main {
   win;
 
   constructor() {
-
     app.whenReady().then(() => {
       this._createWindow();
-      this._adjustForMacOs();
+      this.forMacOs();
     });
   }
 
@@ -42,7 +41,11 @@ class Main {
       frame: false,
       movable: false,
       resizable: false,
+
+      // `alwaysOnTop: true`：不会将窗口置于 MacOS Menu Bar 之上
+      // 使覆盖全屏幕，包含 MacOS Menu Bar
       enableLargerThanScreen: true,
+
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false
@@ -51,13 +54,14 @@ class Main {
 
     this.win.loadFile('renderer/index.html');
 
-    // 使覆盖全屏幕，包含系统任务栏
+    // 使覆盖全屏幕，包含 MacOS Menu Bar
     this.win.setAlwaysOnTop(true, 'screen-saver');
   }
 
-  _adjustForMacOs() {
+  forMacOs() {
     app.on('activate', () => {
-      if (BrowserWindow.getAllWindows().length === 0) this._createWindow();
+      if (BrowserWindow.getAllWindows().length === 0)
+        this._createWindow();
     });
 
     app.on('window-all-closed', () => {

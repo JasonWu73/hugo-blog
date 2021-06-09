@@ -10,7 +10,7 @@ series:
 - Electron Samples
 title: Electron 悬浮窗
 date: 2021-06-03T15:09:14+08:00
-description: 创建一个支持内容切换及拖拽的悬浮窗。
+description: 创建支持内容切换及拖拽的悬浮窗，包含完整目录结构及示例代码。
 ---
 
 > {{<reprint>}}
@@ -22,21 +22,22 @@ description: 创建一个支持内容切换及拖拽的悬浮窗。
 ```
 .
 ├── main
-│   ├── floating-window.js
+│   └── floating-window.js
 ├── renderer
-│   ├── floating-window.html
 │   ├── img
 │   │   └── logo.png
+│   ├── floating-window.html
 │   └── style.css
 ├── sass
 │   ├── abstracts
+│   │   ├── _helpers.scss
 │   │   ├── _mixins.scss
 │   │   └── _variables.scss
-│   ├── base
+│   │── base
 │   │   └── _base.scss
-│   ├── main.scss
-│   └── pages
-│       └── floating-window.scss
+│   │── pages
+│   │   └── _floating-window.scss
+│   └── main.scss
 ├── main.js
 ├── package.json
 └── package-lock.json
@@ -46,9 +47,9 @@ description: 创建一个支持内容切换及拖拽的悬浮窗。
 
 ```package.json
 {
-  "name": "demo",
+  "name": "floating-window",
   "version": "1.0.0",
-  "description": "",
+  "description": "悬浮窗",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -59,24 +60,47 @@ description: 创建一个支持内容切换及拖拽的悬浮窗。
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^12.0.5",
-    "electron-builder": "^22.11.2",
+    "electron": "^13.1.1",
     "nodemon": "^2.0.7",
-    "sass": "^1.33.0"
+    "sass": "^1.34.1"
   }
 }
 ```
 
 ## 主进程
 
-```:main/main.js
-const { app } = require('electron');
+```:main.js
+const { app, BrowserWindow } = require('electron');
 
-const FloatingWindow = require('./floating-window');
+const FloatingWindow = require('./main/floating-window');
 
-app.whenReady().then(() => {
-  new FloatingWindow({ dev: true });
-});
+class Main {
+  floWin = new FloatingWindow();
+
+  constructor() {
+    app.whenReady().then(() => {
+      this._createWindow();
+      this.forMacOs();
+    });
+  }
+
+  _createWindow() {
+    this.floWin.resetWindow();
+  }
+
+  forMacOs() {
+    app.on('activate', () => {
+      if (BrowserWindow.getAllWindows().length === 0)
+        this._createWindow();
+    });
+
+    app.on('window-all-closed', () => {
+      if (process.platform !== 'darwin') app.quit();
+    });
+  }
+}
+
+new Main();
 ```
 
 ```:main/floating-window.js
@@ -85,47 +109,51 @@ const { BrowserWindow, ipcMain } = require('electron');
 class FloatingWindow {
   width = 36;
   height = 36;
-  dev;
+  _min = true; // 是否是最小化的窗口尺寸
+
   win;
-  #mini = true;
 
-  constructor({ dev = false } = {}) {
-    this.dev = dev;
+  resetWindow() {
+    if (this.win && !this.win.isDestroyed()) return;
 
-    this.#createWindow();
+    this._createWindow();
   }
 
-  #createWindow() {
+  _createWindow() {
     this.win = new BrowserWindow({
       width: this.width,
       height: this.height,
-      alwaysOnTop: true,
-      transparent: true,
       frame: false,
+      alwaysOnTop: true,
       resizable: false,
-      hasShadow: false,
+
+      // 将窗口背景设置与页面背景一致，避免闪烁
+      backgroundColor: '#2d2a2e',
+
       webPreferences: {
         nodeIntegration: true,
         contextIsolation: false
       }
     });
 
-    this.win.loadFile('renderer/floating-window.html').then(() => {
-      this.#toggleMain();
-    });
+    // this.win.webContents.openDevTools();
 
-    this.dev && this.win.webContents.openDevTools();
+    this.win.loadFile('renderer/floating-window.html').then(() => {
+      this._toggleWindowSize();
+    });
   }
 
-  #toggleMain() {
-    ipcMain.on('toggle-floating-window', () => {
-      this.#mini = !this.#mini;
+  _toggleWindowSize() {
+    ipcMain.handle('toggle-floating-window', async () => {
+      this._min = !this._min;
 
-      if (this.#mini) {
+      if (this._min) {
         this.win.setSize(this.width, this.height);
       } else {
         this.win.setSize(180, 180);
       }
+
+      return this._min;
     });
   }
 }
@@ -141,44 +169,52 @@ module.exports = FloatingWindow;
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-Security-Policy"
-          content="script-src 'self' 'unsafe-inline'">
+        content="script-src 'self' 'unsafe-inline'">
     <link rel="stylesheet" href="style.css">
     <title>悬浮窗</title>
   </head>
   <body style="-webkit-app-region: drag">
-    <div class="f-win">
-      <img class="f-win__logo" src="img/logo.png">
-      <div class="f-win__tip hidden">双点切换</div>
+    <div class="floating-window">
+      <img class="floating-window__logo" src="img/logo.png">
+      <div class="floating-window__tip hidden">双点切换</div>
     </div>
 
     <script>
       const { ipcRenderer } = require('electron');
 
-      class FloatingWindow {
-        container = document.querySelector('.f-win');
-        logo = document.querySelector('.f-win__logo');
-        tip = document.querySelector('.f-win__tip');
+      class Main {
+        containerEl = document.querySelector('.floating-window');
+        logoEl = document.querySelector('.floating-window__logo');
+        tipEl = document.querySelector('.floating-window__tip');
 
         constructor() {
-          this.#handleDoubleClick();
+          this._handleDoubleClick();
         }
 
-        #handleDoubleClick() {
-          this.container.addEventListener('dblclick', () => {
-            if (this.tip.classList.contains('hidden')) {
-              this.logo.classList.add('hidden');
-              this.tip.classList.remove('hidden');
-            } else {
-              this.logo.classList.remove('hidden');
-              this.tip.classList.add('hidden');
-            }
+        _handleDoubleClick() {
+          this.containerEl.addEventListener('dblclick', () => {
+            this._hideAll();
 
-            ipcRenderer.send('toggle-floating-window');
+            ipcRenderer.invoke('toggle-floating-window').then(min => {
+              if (min) {
+                this.logoEl.classList.remove('hidden');
+              } else {
+                this.tipEl.classList.remove('hidden');
+              }
+            });
           });
+        }
+
+        _hideAll() {
+          !this.logoEl.classList.contains('hidden')
+          && this.logoEl.classList.add('hidden');
+
+          !this.tipEl.classList.contains('hidden')
+          && this.tipEl.classList.add('hidden');
         }
       }
 
-      new FloatingWindow();
+      new Main();
     </script>
   </body>
 </html>
@@ -186,7 +222,7 @@ module.exports = FloatingWindow;
 
 ## 样式（Sass）
 
-```:sass/abstracts/_helper.scss
+```:sass/abstracts/_helpers.scss
 .hidden {
   display: none !important;
 }
@@ -196,7 +232,12 @@ module.exports = FloatingWindow;
 @mixin no-drag {
   -webkit-user-drag: none;
 }
+
+@mixin no-selection {
+  user-select: none;
+}
 ```
+
 ```:sass/abstracts/_variables.scss
 $color-primary: #2d2a2e;
 ```
@@ -230,10 +271,12 @@ img {
   @include no-drag;
 }
 ```
+
 ```:sass/pages/_floating-window.scss
 @use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
 
-.f-win {
+.floating-window {
   height: 100vh;
   background-color: $color-primary;
   display: flex;
@@ -247,6 +290,7 @@ img {
 
   &__tip {
     color: white;
+    @include no-selection;
   }
 }
 ```
@@ -256,5 +300,5 @@ img {
 
 @use 'base/base';
 
-@use './pages/floating-window';
+@use 'pages/floating-window';
 ```
