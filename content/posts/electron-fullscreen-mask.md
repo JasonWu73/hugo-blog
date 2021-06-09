@@ -25,7 +25,7 @@ class Main {
   constructor() {
     app.whenReady().then(() => {
       this._createWindow();
-      this.forMacOs();
+      this._forMacOs();
     });
   }
 
@@ -52,13 +52,13 @@ class Main {
       }
     });
 
-    this.win.loadFile('renderer/index.html');
-
     // 使覆盖全屏幕，包含 MacOS Menu Bar
     this.win.setAlwaysOnTop(true, 'screen-saver');
+
+    this.win.loadFile('renderer/index.html');
   }
 
-  forMacOs() {
+  _forMacOs() {
     app.on('activate', () => {
       if (BrowserWindow.getAllWindows().length === 0)
         this._createWindow();

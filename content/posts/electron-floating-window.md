@@ -80,7 +80,7 @@ class Main {
   constructor() {
     app.whenReady().then(() => {
       this._createWindow();
-      this.forMacOs();
+      this._forMacOs();
     });
   }
 
@@ -88,7 +88,7 @@ class Main {
     this.floWin.resetWindow();
   }
 
-  forMacOs() {
+  _forMacOs() {
     app.on('activate', () => {
       if (BrowserWindow.getAllWindows().length === 0)
         this._createWindow();
