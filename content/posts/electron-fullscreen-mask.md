@@ -37,6 +37,7 @@ class Main {
       height,
       x,
       y,
+      hasShadow: false,
       transparent: true,
       frame: false,
       movable: false,

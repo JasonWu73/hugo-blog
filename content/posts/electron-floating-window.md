@@ -123,9 +123,12 @@ class FloatingWindow {
     this.win = new BrowserWindow({
       width: this.width,
       height: this.height,
-      frame: false,
       alwaysOnTop: true,
+      hasShadow: false,
+      transparent: true,
+      frame: false,
       resizable: false,
+      skipTaskbar: true,
 
       // 将窗口背景设置与页面背景一致，避免闪烁
       backgroundColor: '#2d2a2e',
