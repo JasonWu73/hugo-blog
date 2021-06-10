@@ -30,7 +30,7 @@ class Main {
   }
 
   _createWindow() {
-    const { width, height, x, y } = screen.getPrimaryDisplay().bounds;
+    const { width, height, x, y } = screen.getPrimaryDisplay().size;
 
     this.win = new BrowserWindow({
       width,
