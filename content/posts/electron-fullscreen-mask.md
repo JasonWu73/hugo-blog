@@ -23,6 +23,11 @@ class Main {
   win;
 
   constructor() {
+    // Linux 中禁用 GPU 渲染，否则无法透明窗口
+    if (process.platform === 'linux') {
+      app.disableHardwareAcceleration();
+    }
+    
     app.whenReady().then(() => {
       this._createWindow();
       this._forMacOs();
@@ -30,7 +35,9 @@ class Main {
   }
 
   _createWindow() {
-    const { width, height, x, y } = screen.getPrimaryDisplay().size;
+    // `bounds`：使覆盖全屏幕，包含 MacOS Menu Bar
+    // `size`：仅工作区大小
+    const { width, height, x, y } = screen.getPrimaryDisplay().bounds;
 
     this.win = new BrowserWindow({
       width,
@@ -43,9 +50,16 @@ class Main {
       movable: false,
       resizable: false,
 
-      // `alwaysOnTop: true`：不会将窗口置于 MacOS Menu Bar 之上
+      // 不会将窗口置于 MacOS Menu Bar 之上
+      // alwaysOnTop: true,
+
+      // Windows 下必须配置，MacOS 下不需要（否则会打开一个全屏新桌面）
+      fullscreen: process.platform !== 'darwin',
       // 使覆盖全屏幕，包含 MacOS Menu Bar
       enableLargerThanScreen: true,
+
+      // Windows 下必须配置 `toolbar`，否则会禁用视频播放
+      type: 'toolbar',
 
       webPreferences: {
         nodeIntegration: true,
