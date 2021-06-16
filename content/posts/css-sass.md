@@ -94,6 +94,14 @@ $color-grey: #e3e3e3;
 @mixin filter-white {
   filter: invert(100%);
 }
+
+@mixin absoluteCenter {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
+  z-index: 1;
+}
 ```
 
 ```scss:sass/abstracts/_helpers.scss

@@ -19,7 +19,7 @@ pinned: true
 
 ## 原理
 
-{{< img src="/images/posts/js_async_runtime.jpg" title="JS 异步机制" caption="JS 运行时环境" alt="JS 运行时环境" position="center" >}}
+{{< img src="/images/posts/js-async-runtime.jpg" title="JS 异步机制" caption="JS 运行时环境" alt="JS 运行时环境" position="center" >}}
 
 {{< notice info "回调队列 vs 微任务队列" >}}
 微任务队列和回调队列唯一的不同点在于执行优先级，其中微任务队列拥有更高的优先级，故回调队列可能会出现 starve。

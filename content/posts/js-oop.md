@@ -122,7 +122,7 @@ console.dir(document.querySelector('body'));
 <br>原型链（Prototype Chain）
 : 用于查找原型上的属性和方法。
 
-<br>{{< img src="/images/posts/js_prototype_chain.jpg" title="JS 原型链" caption="示例图" alt="JS 原型链示例图" position="center" >}}
+<br>{{< img src="/images/posts/js-prototype-chain.jpg" title="JS 原型链" caption="示例图" alt="JS 原型链示例图" position="center" >}}
 
 ### 静态属性和方法
 
