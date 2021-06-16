@@ -129,6 +129,9 @@ class FloatingWindow {
       frame: false,
       resizable: false,
       skipTaskbar: true,
+      
+      // Windows 中配置此属性，可避免一些 Bug
+      type: 'toolbar', 
 
       // 将窗口背景设置与页面背景一致，避免闪烁
       backgroundColor: '#2d2a2e',
