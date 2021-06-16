@@ -3,9 +3,9 @@
 - id: StatsTags
   translation: 目前共计 {{ len .Data.Terms }} 个标签
 - id: StatsBlogs
-  translation: 目前共计 {{ .Count }} 篇日志。 继续努力。
+  translation: 目前共计 {{ .Count }} 篇文章
 - id: Blog
-  translation: 日志
+  translation: 文章
 - id: Category
   translation: 分类
 - id: Archive
