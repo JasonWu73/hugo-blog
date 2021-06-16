@@ -1,0 +1,11 @@
+<span class="post-time">
+  <span class="post-meta-item-icon">
+    <i class="fa fa-calendar-o"></i>
+  </span>
+  <span class="post-meta-item-text">
+    {{ i18n "Time" }}{{ i18n "Colon"}}
+  </span>
+  <time itemprop="dateCreated" datetime="2021-06-16T17:42:47+08:00" content="{{ .Date.Format .Site.Params.DateFormat }}">
+    {{ .Date.Format .Site.Params.DateFormat }}
+  </time>
+</span>
