@@ -1,3 +1,59 @@
 baseURL = "https://www.wuxianjie.net/"
 languageCode = "zh-CN"
 title = "个人技术站点JASONWU"
+Theme =  "next"
+MetaDataFormat =  "yaml"
+CanonifyUrls =  true
+BuildDrafts =  false
+PaginatePath =  "p"
+Paginate = 10
+DisablePathToLower =  false
+HasCJKLanguage = true
+PreserveTaxonomyNames = false
+UglyUrls = false
+PygmentsStyle = "perldoc"
+pygmentsCodefences = true
+pygmentsCodefencesGuessSyntax = true
+DefaultContentLanguage = "zh"
+
+[Params]
+    Introduce = "全栈开发"
+    Description = "吴仙杰 | Jason Wu | 博客"
+    Keywords =  "吴仙杰,jasonwu,个人,博客,程序员,技术,分享"
+    Subtitle = "Keep Coding"
+    Imglogo = "/img/logo.png"
+    AuthorImg = "/img/author.png"
+    DateFormat = "2006-01-02"
+    YearFormat = "2006年"
+    MonthFormat = "01-02"
+    BaiduStatsId = "e4fe9ee72eda87a23b2c1f9fd6a8ba12"
+    Fancybox = true
+
+[Author]
+    Name = "吴仙杰"
+
+[[Menu.Main]]
+    Name = "文章"
+    Pre = "code"
+    URL = "/"
+    Weight = 1
+[[Menu.Main]]
+    Name = "归档"
+    Pre = "paperclip"
+    URL = "/post/"
+    Weight = 3
+[[Menu.Main]]
+    Name = "关于"
+    Pre = "info"
+    URL = "/about/"
+    Weight = 4
+
+[[Params.Socials]]
+    Name = "邮箱"
+    Icon = "envelope-square"
+    URL = "mailto:wuxianjiezh@163.com"
+
+[[Params.Socials]]
+    Name = "GitHub"
+    Icon = "github"
+    URL = "https://github.com/JasonWu73/"
