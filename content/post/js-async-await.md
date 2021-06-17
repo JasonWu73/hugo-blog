@@ -1,22 +1,23 @@
 ---
 toc: true
 categories:
-  - "JavaScript"
+  - JavaScript
 tags:
-  - "async"
-  - "promise"
-series:
-  - "JavaScript Async"
-title: "JavaScript 使用 Promise：Async/Await"
-date: "2021-05-31"
-description: "ES2017 async/await 及 Promise Combinator"
+  - Async
+  - Promise
+title: 📌 JavaScript 使用 Promise：Async/Await
+weight: 1
+date: 2021-05-31
+description: ES2017 async/await 及 Promise Combinator
 ---
 
 通过 ES2017 `async`/`await` 及 Promise Combinator 实现优雅的异步代码。
 
+<!--more-->
+
 ## 以同步写异步
 
-语法糖：`async`/`await` 并没有为 JS 添加新特性，仅仅是为 Promise 提供了一种更易写易懂的语法。
+语法糖：`async`/`await` 并没有为 JS 语言添加新特性，仅仅是为 Promise 提供了一种更易写易懂的语法。
 
 ```js
 const wait = sec =>
@@ -71,7 +72,7 @@ console.log(asyncFunc()); // Promise {<fulfilled>: "语法糖"}
 
 ## 错误处理
 
-`tray...catch...finally`。
+`tray...catch...finally`
 
 ```js
 (async () => {
@@ -83,7 +84,8 @@ console.log(asyncFunc()); // Promise {<fulfilled>: "语法糖"}
       throw new Error(`服务出错（${postRes.status}）`);
     }
 
-    const post = postRes.json();
+    const post = await postRes.json();
+
     console.log(post);
 
   } catch (err) {
@@ -158,7 +160,7 @@ getPost()
 
 ## Promise Combinator
 
-以下方法全部都是并行执行 Promise，不存在阻塞一说！
+组合多个 Promise 共同执行。
 
 ### Promise.all()
 
@@ -194,7 +196,7 @@ const getPost = async (postId) => {
 })();
 ```
 
-Short Circuit：只要有一个 Rejected Promise，就会导致 `Promise.all()` 结果错误。
+**Short Circuit**：只要有一个 Rejected Promise，就会导致 `Promise.all()` 结果错误。
 
 ```js
 (async () => {
@@ -209,7 +211,9 @@ Short Circuit：只要有一个 Rejected Promise，就会导致 `Promise.all()` 
 
 ### Promise.race()
 
-忽略的变量：以 `_` 作为被忽略的变量名称，即表示在上下文中不需要的变量。
+约定俗成：以 `_` 作为被忽略的变量名称，即表示在上下文中不需要的变量。
+
+> 此外，`_` 也是 [Lodash](https://lodash.com/) 的默认命名空间。
 
 ```js
 const getPost = async (postId) => {
@@ -237,22 +241,31 @@ const timeout = sec => new Promise((_, reject) => {
 })();
 ```
 
-Short Circuit：只要有一个 Settled Promise，就会使 `Promise.race()` 返回结果。
+**Short Circuit**：只要有一个 Settled Promise，就会使 `Promise.race()` 返回结果。
 
 ```js
 (async () => {
   const proRace = await Promise.race([
-    Promise.resolve('成功'),
-    Promise.reject('失败')
+    Promise.resolve('成功1'),
+    Promise.reject('失败1')
   ]);
 
-  console.log(proRace); // 成功
+  console.log(proRace); // 成功1
+})();
+
+(async () => {
+  const proRace = await Promise.race([
+    Promise.reject('失败2'),
+    Promise.resolve('成功2')
+  ]);
+
+  console.log(proRace); // Uncaught (in promise) 失败2
 })();
 ```
 
 ### Promise.allSettled()
 
-No Short Circuit：ES2020 引入，与 `Promise.all()` 类似，除了 `Promise.allSettled()` 一定会保证所有 Promise 都为 Settled 状态。
+**No Short Circuit**：ES2020 引入，与 `Promise.all()` 类似，除了 `Promise.allSettled()` 一定会保证所有 Promise 都为 Settled 状态。
 
 ```js
 (async () => {
@@ -268,28 +281,39 @@ No Short Circuit：ES2020 引入，与 `Promise.all()` 类似，除了 `Promise.
 
 ### Promise.any()
 
-Short Circuit：ES2021 引入，与 `Promise.race()` 类似，除了 `Promise.any()` 只返回第一个 Fulfilled Promise，而忽略 Rejected Promise。
+**Short Circuit**：ES2021 引入，与 `Promise.race()` 类似，除了 `Promise.any()` 只返回第一个 Fulfilled Promise，而忽略 Rejected Promise。
 
 ```js
-const getPost = async (postId) => {
-  const baseUrl = 'https://jsonplaceholder.typicode.com';
-  const postUrl = `${baseUrl}/posts/${postId}`;
-  const postRes = await fetch(postUrl);
-  return await postRes.json();
-};
-
-const timeout = sec => new Promise((_, reject) => {
-  // 约定俗成：以 `_` 表示被忽略的变量
-  setTimeout(() => reject(new Error(`请求超时${sec}秒`)), sec * 1000);
-});
-
 (async () => {
-  const post = await Promise.any([
-    getPost(1),
-    timeout(1)
+  const proAny = await Promise.any([
+    new Promise(resolve => {
+      console.log('执行：成功1');
+      resolve('成功1');
+    }),
+    new Promise((_, reject) => {
+      console.log('执行：失败1-1');
+      reject('失败1-1');
+    }),
+    new Promise(resolve => {
+      console.log('执行：成功1-1');
+      resolve('成功1-1');
+    }),
   ]);
 
-  console.log(post.id);
-  // 1
+  // 执行：成功1
+  // 执行：失败1-1
+  // 执行：成功1-1
+
+  console.log(proAny); // 成功1
+})();
+
+(async () => {
+  const proAny = await Promise.any([
+    Promise.reject('失败2'),
+    Promise.resolve('成功2'),
+    Promise.resolve('成功2-1')
+  ]);
+
+  console.log(proAny); // 成功2
 })();
 ```

@@ -1,20 +1,19 @@
 ---
 toc: true
 categories:
-  - "JavaScript"
+  - JavaScript
 tags:
-  - "oop"
-series:
-  - "JavaScript OOP"
-title: "JavaScrip OOP：ES6 Class"
-date: "2021-06-01"
-description: "JS Classes"
+  - oop
+title: JavaScrip OOP：ES6 Class
+date: 2021-06-01
+description: JS Classes
 ---
+
 ## ES6 Class 特点
 
 - 仅仅是[构造函数]({{< relref "/post/js-oop#构造函数" >}})的语法糖
 - 不会 Hoisted
-- 是 First Class Citizen，即类可以被当成参数使用
+- First Class Citizen，即类可以被当成参数使用
 - Class Body 永远都只在 Strict Mode（`'use strict';`）下执行
 
 ## 类表达式 vs 类声明
@@ -24,7 +23,7 @@ description: "JS Classes"
 - 类表达式（Class Expression）
 - 类声明（Class Declaration）
   
-<br>但与函数不同的是：类声明**不会** Hoisted！
+但与函数不同的是：类声明**不会** Hoisted！
 
 ```js
 // 类声明
@@ -166,7 +165,7 @@ console.log(jason instanceof Object); // true
 
 ### 伪私有属性和方法
 
-因很长一段时间 JS 都是没有私有特性，故约定俗成：以 `_` 开头的属性或方法就是私有的，开发人员不应直接操作这类名称的变量。
+因很长一段时间 JS 都是没有私有特性，故约定俗成：以 `_` 开头的属性或方法就是私有的，其他开发人员不应直接操作这类名称的变量。
 
 ```js
 class User {

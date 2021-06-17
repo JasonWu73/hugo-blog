@@ -1,17 +1,19 @@
 ---
 toc: true
 categories:
-  - "Network"
+  - Network
 tags:
-  - "http"
-series:
-  - "HTTP(S)"
-title: "HTTP 请求与响应报文格式"
-date: "2021-05-30"
-description: "HTTP 请求报文和 HTTP 响应报文格式"
+  - HTTP(S)
+title: HTTP 请求与响应报文格式
+date: 2021-05-30
+description: HTTP Request Message 和 HTTP Response Message
 ---
 
-## 请求报文（Request Message）
+HTTP 请求报文（Request Message）和 HTTP 响应报文（Response Message）格式。
+
+<!--more-->
+
+## 请求报文
 
 ```http
 GET /posts/1 HTTP/1.1
@@ -22,13 +24,12 @@ Accept-Language: en,zh;q=0.9
 <BODY>
 ```
 
-1. 请求行（Request-Line）
-    - `Request-Line = Method SP Request-URI SP HTTP-Version CRLF`
+1. 请求行（Request-Line）：`Request-Line = Method SP Request-URI SP HTTP-Version CRLF`
 2. 0个或多个请求头
 3. 空行，指示请求头字段结束
 4. 一个可选的请求体
 
-## 响应报文（Response Message）
+## 响应报文
 
 ```http
 HTTP/1.1 200 OK
@@ -38,8 +39,7 @@ Content-Type: application/json; charset=UTF-8
 <BODY>
 ```
 
-1.  状态行（Status-Line）
-    - `Status-Line = HTTP-Version SP Status-Code SP Reason-Phrase CRLF`
+1.  状态行（Status-Line）：`Status-Line = HTTP-Version SP Status-Code SP Reason-Phrase CRLF`
 2. 0个或多个响应头
 3. 空行，指示响应头字段结束
 4. 一个可选的响应体

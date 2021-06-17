@@ -1,15 +1,14 @@
 ---
 toc: true
 categories:
-  - "JavaScript"
+  - JavaScript
 tags:
-  - "async"
-  - "promise"
-series:
-  - "JavaScript Async"
-title: "JavaScript 构建 Promise"
-date: "2021-05-30"
-description: "通过 Promise 优化旧的 JS 异步 API"
+  - Async
+  - Promise
+title: 📌 JavaScript 构建 Promise
+weight: 1
+date: 2021-05-30
+description: 通过 Promise 优化旧的 JS 异步 API
 ---
 
 ## 介绍 Promise
@@ -20,7 +19,7 @@ Promise
 Promise 的优点：
 
 - 无需依赖将事件和回调传递给异步函数，就可以处理异步结果
-- 可为一系列异步操作提供 Promise 链式调用，从而避免回调地狱（callback hell）
+- 可为一系列异步操作提供 Promise 链式调用，从而避免回调地狱（Callback Hell）
 
 Promise 生命周期：
 
@@ -49,8 +48,8 @@ const lotteryPro = new Promise((resolve, reject) => {
 });
 
 lotteryPro
-        .then(res => console.log(res))
-        .catch(err => console.error(err.message));
+  .then(res => console.log(res))
+  .catch(err => console.error(err.message));
 ```
 
 此外，还可以使用 `Promise.resolve` 或 `Promise.reject` 来构建立即执行的 Promise。
@@ -64,7 +63,7 @@ Promise.reject(new Error('错误'))
 
 ## Promise ≠ 异步
 
-Promise 不等于异步：Promise 不会也不能将同步代码转为异步代码，它的作用仅仅是包装异步代码，从而使得异步编码方式更加优雅，并使异步代码支持 [Async/Await 关键字]({{< relref "/post/js-async-await" >}})。
+Promise 不等于异步：Promise 不会也不能将同步代码转为异步代码，它的作用仅仅是包装异步代码，从而使调用异步变得更加优雅，并使之支持 [`async`/`await` 关键字]({{< relref "/post/js-async-await" >}})。
 
 ```js
 const startMilli = Date.now();
@@ -72,18 +71,18 @@ console.log(`1：开始执行`);
 
 // Promise 不能也不会将同步代码转换为异步代码
 new Promise(resolve => {
-   // 假设正在运行一段耗时代码
-   const start = Date.now();
+  // 假设正在运行一段耗时代码
+  const start = Date.now();
 
-   while (Date.now() - start <= 2000) {
-      // 模拟2秒耗时操作
-   }
+  while (Date.now() - start <= 2000) {
+    // 模拟2秒耗时操作
+  }
 
-   resolve('2秒 Promise');
+  resolve('2秒 Promise');
 })
-        .then(data => console.log(data));
+  .then(data => console.log(data));
 
-// 该代码会被阻塞2秒
+// 该代码会被阻塞至少2秒
 const duration = Math.trunc((Date.now() - startMilli) / 1000);
 console.log(`2：结束执行，耗时：${duration}秒`);
 
@@ -128,23 +127,23 @@ wait(1)
   });
 ```
 
-回调地狱（callback hell）：
+回调地狱（Callback Hell）：
 
 ```js
 setTimeout(() => {
-   console.log('1秒后执行');
+  console.log('1秒后执行');
 
-   setTimeout(() => {
-      console.log('2秒后执行');
+  setTimeout(() => {
+    console.log('2秒后执行');
+
+    setTimeout(() => {
+      console.log('3秒后执行');
 
       setTimeout(() => {
-         console.log('3秒后执行');
-
-         setTimeout(() => {
-            console.log('4秒后执行');
-         }, 1000);
+        console.log('4秒后执行');
       }, 1000);
-   }, 1000);
+    }, 1000);
+  }, 1000);
 }, 1000);
 ```
 

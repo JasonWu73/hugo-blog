@@ -1,15 +1,18 @@
 ---
+toc: true
 categories:
-  - "JavaScript"
+  - JavaScript
 tags:
-  - "async"
-  - "xhr"
-series:
-  - "JavaScript Async"
-title: "JavaScript AJAX：XMLHttpRequest"
-date: "2021-05-30"
-description: "通过 XMLHttpRequest 对象发送 AJAX"
+  - Async
+  - XHR
+title: JavaScript AJAX：XMLHttpRequest
+date: 2021-05-30
+description: 通过 XMLHttpRequest 对象发送 AJAX 请求
 ---
+
+通过 XMLHttpRequest 对象发送 AJAX 请求的示例代码。
+
+<!--more-->
 
 ## GET 请求
 

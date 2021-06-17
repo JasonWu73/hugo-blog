@@ -1,17 +1,19 @@
 ---
 toc: true
 categories:
-  - "JavaScript"
+  - JavaScript
 tags:
-  - "async"
-  - "xhr"
-  - "promise"
-series:
-  - "JavaScript Async"
-title: "JavaScript AJAX：Fetch API"
-date: "2021-05-30"
-description: "通过 Fetch API 发送 AJAX"
+  - Async
+  - XHR
+  - Promise
+title: JavaScript AJAX：Fetch API
+date: 2021-05-30
+description: 通过 Fetch API 发送 AJAX 请求
 ---
+
+通过 Fetch API 发送 AJAX 请求。
+
+<!--more-->
 
 ## fetch 会立即触发 AJAX 请求
 
@@ -26,7 +28,7 @@ const postPro = fetch(`${baseUrl}/posts/1`);
 console.log(postPro); // Promise {<pending>}
 ```
 
-AJAX 的执行与 then、catch 和 finally 无关：`then`、`catch` 和 `finally` 仅仅代表在 AJAX 请求结束后，应该执行什么的操作，而 AJAX 在调用 `fetch` 函数时就已经开始执行了。
+AJAX 的执行与 then、catch 和 finally 无关：`then`、`catch` 和 `finally` 仅仅代表在 AJAX 请求结束后，应该执行什么样的操作，而 AJAX 在调用 `fetch` 函数时就已经开始执行了。
 
 ## 自动装箱 Promise
 
@@ -72,7 +74,7 @@ fetch(`${baseUrl}/posts/1`)
 - `catch` 处理异步操作执行失败后的结果
 - `finally` 则不考虑异步操作成功还是失败，仅仅关心在异步操作执行完毕后，需要处理的事情
 
-因 `then`、`catch` 和 `finally` 三者具有相同优先级，故代码顺序非常重要。一般都为先 `then`，再 `catch`，最后 `finally`。
+因 `then`、`catch` 和 `finally` 三者具有相同优先级，故代码顺序很重要。
 
 ## response.json() 返回 Promise
 
@@ -138,7 +140,7 @@ fetch(`${baseUrl}/posts/`, {
   .catch(err => console.error(err.message));
 ```
 
-虽然 Promise 可以很优雅地处理异步回调问题，避免回调地狱（callback hell）。但如果使用方式不当，则同样会出现回调地狱。比如：
+虽然 Promise 可以很优雅地处理异步回调问题，避免回调地狱（Callback Hell）。但如果使用方式不当，则同样会出现回调地狱。比如：
 
 ```js
 const baseUrl = 'https://jsonplaceholder.typicode.com';
@@ -163,6 +165,7 @@ fetch(`${baseUrl}/posts/`, {
   .then(post => {
     console.log(post);
 
+    // 回调地狱
     fetch(`${baseUrl}/posts/${post.id}`)
       .then(res => {
         if (!res.ok)

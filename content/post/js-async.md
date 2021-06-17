@@ -1,19 +1,20 @@
 ---
 toc: true
 categories:
-  - "JavaScript"
+  - JavaScript
 tags:
-  - "async"
-series:
-  - "JavaScript Async"
-title: JavaScript 异步原理：Event Loop
-date: "2021-05-30"
-description: "详解 JS 异步机制实现"
+  - Async
+title: 📌 JavaScript 异步原理：Event Loop
+weight: 1
+date: 2021-05-30
+description: 详解 JS 异步机制的实现原理
 ---
 
-## 原理
-
 ![](/img/js-async-runtime.jpg)
+
+<!--more-->
+
+## 原理
 
 回调队列 vs 微任务队列：微任务队列和回调队列唯一的不同点在于执行优先级，其中微任务队列拥有更高的优先级，故回调队列可能会出现 starve。
 

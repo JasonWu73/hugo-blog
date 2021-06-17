@@ -1,19 +1,20 @@
 ---
 toc: true
 categories:
-  - "JavaScript"
+  - JavaScript
 tags:
-  - "oop"
-series:
-  - "JavaScript OOP"
-title: "JavaScript OOP：原型链"
-date: "2021-06-01"
-description: "JS OOP（Object-Oriented Programming）实现原理及方式"
+  - OOP
+title: 📌 JavaScript OOP：原型链
+weight: 1
+date: 2021-06-01
+description: JS OOP 继承链
 ---
+
+JS OOP（Object-Oriented Programming）的实现原理及方式。
 
 ## 原型继承
 
-JS 中的 OOP 与 Java 不同，JS 中没有真正意义上的类，它是通过原型（Prototype）实现 OOP 的。
+JS 中的 OOP 与 Java 不同，JS 中没有真正意义上的类，它是通过原型（Prototype）实现 OOP。
 
 面向对象的四大基本特征：抽象（Abstraction）、封装（Encapsulation）、继承（Inheritance）和多态（Polymorphism）在 JS OOP 中和其他语言没有任何区别。
 
@@ -34,7 +35,7 @@ JS 中实现原型继承有三种方式：
 
 构造函数与普通函数的唯一区别：构造函数使用 `new` 操作符调用。
 
-由于箭头函数没有自己的 `this` 关键字，因此箭头函数不能作为构造函数，也不能用于作为原型对象的方法。
+由于箭头函数没有自己的 `this` 关键字，因此箭头函数**不能**作为构造函数，也**不能**用于作为原型对象的方法。
 
 ### 创建对象（错误示例）
 

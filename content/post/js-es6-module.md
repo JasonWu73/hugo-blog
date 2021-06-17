@@ -1,14 +1,13 @@
 ---
 toc: true
 categories:
-  - "JavaScript"
+  - JavaScript
 tags:
-  - "module"
-series:
-  - "JavaScript Docs"
-title: "JavaScript ES6 模块"
-date: "2021-06-04"
-description: "JS import export"
+  - JS Module
+title: 📌 JavaScript ES6 模块
+weight: 1
+date: 2021-06-04
+description: ES6 import/export 模块
 ---
 
 ## ES6 模块 vs JS 普通文件
@@ -72,12 +71,12 @@ export default function name1(...) { ... } // 同 `class`，function*
 export { name1 as default, ... };
 ```
 
-示例，`index.js`：
+示例，`index.js`
 
 ```js
 import {
   lan, // 导入命名导出
-  programs as p // 导入并重命名导出
+  programs as p // 导入命名导出，并重命名引用
 } from './m1.js';
 
 console.log(lan);
@@ -117,7 +116,7 @@ const module = await import('./m1.js');
 console.log(module.arr);
 ```
 
-`m1.js`：
+`m1.js`
 
 ```js
 // 命名导出
@@ -141,7 +140,7 @@ export const add = (val) => {
 };
 ```
 
-`index.html`：
+`index.html`
 
 ```html
 <script type="module" src="index.js"></script>
@@ -172,8 +171,7 @@ console.log(api.privateVal); // undefined
 缺点：
 
 - 无法避免变量名的全局污染
-- 在 HTML 中引入的编码顺序很重要，即需手动识别依赖
-    - 被依赖脚本要在依赖脚本之前引入
+- 需手动识别 JS 文件间的依赖关系，在 HTML 中必须是被依赖的 JS 先导入 
 
 ## ES6 以前常用的 JS 模块库
 

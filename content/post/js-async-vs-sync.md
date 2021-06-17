@@ -1,15 +1,12 @@
 ---
 toc: true
 categories:
-  - "JavaScript"
+  - JavaScript
 tags:
-  - "async"
-  - "sync"
-series:
-  - "JavaScript Async"
-title: "JavaScript 异步 vs 同步"
-date: "2021-05-29"
-description: "JS 中的异步和同步的区别"
+  - Async
+title: JavaScript 异步 vs 同步
+date: 2021-05-29
+description: JS 中异步和同步的直观对比
 ---
 
 ## 同步代码
@@ -17,7 +14,7 @@ description: "JS 中的异步和同步的区别"
 - 代码按顺序一行一行执行
 - 当执行耗时操作时，后续代码只能等待当前代码执行完成后才能执行
 
-同步 `alert`，`index.js`：
+比如 `alert` 函数就是同步代码。
 
 ```js
 const p = document.querySelector('.paragraph');
@@ -25,8 +22,6 @@ p.textContent = 'JS 修改后内容';
 alert('阻塞')
 p.style.color = 'red';
 ```
-
-`index.html`：
 
 ```html
 <p class="paragraph">初始内容</p>
@@ -39,7 +34,7 @@ p.style.color = 'red';
 - 只会在“后台”任务执行完成后执行
 - **非阻塞式**，即后续代码不会等待异步代码执行完成后再执行。实际的效果就是，仿佛直接跳过了异步代码
 
-异步 `setTimeout`，`index.js`：
+比如 `setTimeout` 函数就是异步代码。
 
   ```js
   const p = document.querySelector('.paragraph');
@@ -49,15 +44,13 @@ p.style.color = 'red';
   p.style.color = 'red';
   ```
 
-`index.html`：
-
 ```html
 <p class="paragraph">初始内容</p>
 
 <script src="index.js"></script>
 ```
 
-再比如 DOM 加载图片也属于异步操作，`index.js`：
+再比如 DOM 加载图片也属于异步操作。
 
 ```js
 const img = document.querySelector('.logo');
@@ -67,14 +60,12 @@ const p = document.querySelector('.paragraph');
 img.src = 'logo.png';
 
 img.addEventListener('load', () => {
-// 在图片加载完成后触发
-p.textContent = '图片加载完成';
+  // 在图片加载完成后触发
+  p.textContent = '图片加载完成';
 });
 
 p.style.color = 'red';
 ```
-
-`index.html`：
 
 ```html
 <img class="logo">

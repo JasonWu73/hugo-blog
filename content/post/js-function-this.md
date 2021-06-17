@@ -1,15 +1,17 @@
 ---
 toc: true
 categories:
-  - "JavaScript"
+  - JavaScript
 tags:
-  - "this"
-series:
-  - "JavaScript Docs"
-title: "JavaScript 函数中的 this 值"
-date: "2021-05-29"
-description: "动态修改 JS 函数中的 this 值"
+  - 关键字 this
+title: JavaScript 函数中的 this 值
+date: 2021-05-29
+description: JS 的 call、apply 和 bind 函数
 ---
+
+动态修改 JS 函数中的 `this` 值。
+
+<!--more-->
 
 ## 通用代码片段
 
@@ -74,7 +76,7 @@ jsCourse.score.apply(nodeCourse, [true, 5]);
 // 已有1人评价，您的评价为：👍 ⭐️⭐️⭐️⭐️⭐️
 ```
 
-`apply` 和 [`call`]({{< relref "#functionprototypecall" >}}) 除了第二个参数不同外，其他没有任何区别。也可通过 [Spread 语法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)使用 `call` 代替：
+`apply` 和 [`call`]({{< relref "#functionprototypecall" >}}) 除了第二个参数不同外，其他没有任何区别。可通过 [Spread 语法](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)统一都使用 `call`：
 
 ```js
 jsCourse.score.call(nodeCourse, ...[true, 5]);
