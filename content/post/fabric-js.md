@@ -1,22 +1,22 @@
 ---
 categories:
-  - "JavaScript"
+  - JavaScript
 tags:
-  - "fabric.js"
-series:
-  - "HTML Canvas Samples"
-title: "HTML Canvas：FabricJS"
-date: "2021-06-11"
-description: "Fabric.js v4.4.0"
+  - Fabric.js
+title: HTML Canvas：FabricJS
+date: 2021-06-11
+description: Fabric.js v4.4.0 示例代码
 ---
 
 Fabric.js v4.4.0 实现画笔、文本、直线及椭圆等绘制的示例代码。
 
-`index.html`：
+<!--more-->
+
+`index.html`
 
 ```html
 <!DOCTYPE html>
-<html lang="zh">
+<html>
   <head>
     <meta charset="UTF-8">
     <title>FabricJS</title>
@@ -99,16 +99,16 @@ Fabric.js v4.4.0 实现画笔、文本、直线及椭圆等绘制的示例代码
 </html>
 ```
 
-`index.js`：
+`index.js`
 
 ```js
 class Main {
-  _modeEls = document.querySelectorAll('.js-mode');
-  _undoEls = document.getElementById('js-undo');
-  _widthEls = document.querySelectorAll('input[name="width"]');
-  _colorEls = document.querySelectorAll('input[name="color"]');
+  modeEls = document.querySelectorAll('.js-mode');
+  undoEls = document.getElementById('js-undo');
+  widthEls = document.querySelectorAll('input[name="width"]');
+  colorEls = document.querySelectorAll('input[name="color"]');
 
-  _canvas;
+  canvas;
 
   _width = 6;
   _color = '#e74c3c';
@@ -131,26 +131,26 @@ class Main {
   }
 
   _init() {
-    this._canvas = new fabric.Canvas('js-canvas', {
+    this.canvas = new fabric.Canvas('js-canvas', {
       width: window.innerWidth,
       height: window.innerHeight,
       isDrawingMode: true,
       selection: false
     });
 
-    this._canvas.freeDrawingBrush.width = this._width;
-    this._canvas.freeDrawingBrush.color = this._color;
+    this.canvas.freeDrawingBrush.width = this._width;
+    this.canvas.freeDrawingBrush.color = this._color;
 
     // 记录操作历史
-    this._canvas.on('object:added', () => {
-      this._histories.push(JSON.stringify(this._canvas));
+    this.canvas.on('object:added', () => {
+      this._histories.push(JSON.stringify(this.canvas));
     });
 
     this._registerCanvasEvent();
   }
 
   _toggleModeClick() {
-    this._modeEls.forEach(el => {
+    this.modeEls.forEach(el => {
       el.addEventListener('click', e => {
         const tarEl = e.target.closest('.js-mode');
         const mode = tarEl.dataset.mode;
@@ -163,52 +163,52 @@ class Main {
         this._resetAllMode();
 
         if (mode === this._modes.draw) {
-          this._canvas.isDrawingMode = true;
+          this.canvas.isDrawingMode = true;
 
         } else if (mode === this._modes.eraser) {
-          this._canvas.hoverCursor = 'not-allowed';
+          this.canvas.hoverCursor = 'not-allowed';
 
         } else if (mode === this._modes.text) {
-          this._canvas.defaultCursor = 'text';
-          this._canvas.hoverCursor = 'text';
+          this.canvas.defaultCursor = 'text';
+          this.canvas.hoverCursor = 'text';
 
         } else if (mode === this._modes.line) {
-          this._canvas.defaultCursor = 'crosshair';
-          this._canvas.hoverCursor = 'crosshair';
+          this.canvas.defaultCursor = 'crosshair';
+          this.canvas.hoverCursor = 'crosshair';
 
         } else if (mode === this._modes.ellipse) {
-          this._canvas.defaultCursor = 'crosshair';
-          this._canvas.hoverCursor = 'crosshair';
+          this.canvas.defaultCursor = 'crosshair';
+          this.canvas.hoverCursor = 'crosshair';
 
         } else if (mode === this._modes.rect) {
-          this._canvas.defaultCursor = 'crosshair';
-          this._canvas.hoverCursor = 'crosshair';
+          this.canvas.defaultCursor = 'crosshair';
+          this.canvas.hoverCursor = 'crosshair';
         }
       });
     });
   }
 
   _handleUndoClick() {
-    this._undoEls.addEventListener('click', () => {
+    this.undoEls.addEventListener('click', () => {
       this._histories.pop(); // 排除当前状态
 
       if (this._histories.length === 0) {
-        this._canvas.clear().requestRenderAll();
+        this.canvas.clear().requestRenderAll();
         return;
       }
 
       const state = this._histories.pop();
       this._histories = []; // 清空队列
-      this._canvas.loadFromJSON(state, () => {
-        this._canvas.requestRenderAll();
+      this.canvas.loadFromJSON(state, () => {
+        this.canvas.requestRenderAll();
       });
     });
   }
 
   _handleRadioChange() {
-    const brush = this._canvas.freeDrawingBrush;
+    const brush = this.canvas.freeDrawingBrush;
 
-    this._widthEls.forEach(el => {
+    this.widthEls.forEach(el => {
       el.addEventListener('change', e => {
         this._width = +e.target.dataset.value;
 
@@ -217,7 +217,7 @@ class Main {
       });
     });
 
-    this._colorEls.forEach(el => {
+    this.colorEls.forEach(el => {
       el.addEventListener('change', e => {
         this._color = e.target.dataset.value;
 
@@ -232,19 +232,21 @@ class Main {
     let line, ellipse, rect;
     let origX, origY;
 
-    this._canvas.on('mouse:down', options => {
+    this.canvas.on('mouse:down', options => {
       const e = options.e;
       mouseDown = true;
 
       if (options.target && this._curMode === this._modes.eraser) {
-        this._canvas.getActiveObjects().forEach(obj => {
-          this._canvas.remove(obj);
+        this.canvas.getActiveObjects().forEach(obj => {
+          this.canvas.remove(obj);
         });
 
       } else if (this._curMode === this._modes.text) {
         const text = new fabric.IText('', {
-          left: e.screenX,
-          top: e.screenY,
+          // 减多少，我也是凑的，能用就行
+          left: e.clientX - 8,
+          top: e.clientY - 23,
+
           fill: this._color,
           fontSize: 24,
           lockMovementX: true,
@@ -256,11 +258,11 @@ class Main {
           hasBorders: false
         });
 
-        this._canvas.add(text).setActiveObject(text);
+        this.canvas.add(text).setActiveObject(text);
         text.enterEditing();
 
       } else if (this._curMode === this._modes.line) {
-        const { x, y } = this._canvas.getPointer(e);
+        const { x, y } = this.canvas.getPointer(e);
         const points = [x, y, x, y];
 
         line = new fabric.Line(points, {
@@ -278,10 +280,10 @@ class Main {
           hasBorders: false
         });
 
-        this._canvas.add(line);
+        this.canvas.add(line);
 
       } else if (this._curMode === this._modes.ellipse) {
-        const { x, y } = this._canvas.getPointer(e);
+        const { x, y } = this.canvas.getPointer(e);
         origX = x;
         origY = y;
 
@@ -304,10 +306,10 @@ class Main {
           hasBorders: false
         });
 
-        this._canvas.add(ellipse);
+        this.canvas.add(ellipse);
 
       } else if (this._curMode === this._modes.rect) {
-        const { x, y } = this._canvas.getPointer(e);
+        const { x, y } = this.canvas.getPointer(e);
         origX = x;
         origY = y;
 
@@ -331,22 +333,22 @@ class Main {
           hasBorders: false
         });
 
-        this._canvas.add(rect);
+        this.canvas.add(rect);
       }
     });
 
-    this._canvas.on('mouse:move', options => {
+    this.canvas.on('mouse:move', options => {
       if (!mouseDown) return;
 
       const e = options.e;
 
       if (this._curMode === this._modes.line) {
-        const { x, y } = this._canvas.getPointer(e);
+        const { x, y } = this.canvas.getPointer(e);
         line.set({ x2: x, y2: y });
-        this._canvas.requestRenderAll();
+        this.canvas.requestRenderAll();
 
       } else if (this._curMode === this._modes.ellipse) {
-        const { x, y } = this._canvas.getPointer(e);
+        const { x, y } = this.canvas.getPointer(e);
         let rx = Math.abs(origX - x) / 2;
         let ry = Math.abs(origY - y) / 2;
         if (rx > ellipse.strokeWidth) {
@@ -368,10 +370,10 @@ class Main {
           ellipse.set({ originY: 'top' });
         }
 
-        this._canvas.requestRenderAll();
+        this.canvas.requestRenderAll();
 
       } else if (this._curMode === this._modes.rect) {
-        const { x, y } = this._canvas.getPointer(e);
+        const { x, y } = this.canvas.getPointer(e);
 
         if (origX > x) {
           rect.set({ left: Math.abs(x) });
@@ -383,11 +385,11 @@ class Main {
         rect.set({ width: Math.abs(origX - x) });
         rect.set({ height: Math.abs(origY - y) });
 
-        this._canvas.requestRenderAll();
+        this.canvas.requestRenderAll();
       }
     });
 
-    this._canvas.on('mouse:up', () => {
+    this.canvas.on('mouse:up', () => {
       mouseDown = false;
 
       if (this._curMode === this._modes.line) {
@@ -402,15 +404,15 @@ class Main {
 
   _resetAllMode() {
     // Fabric.js
-    this._canvas.isDrawingMode = false;
-    this._canvas.defaultCursor = 'default';
-    this._canvas.hoverCursor = 'default';
+    this.canvas.isDrawingMode = false;
+    this.canvas.defaultCursor = 'default';
+    this.canvas.hoverCursor = 'default';
 
     this._preventAllControl();
   }
 
   _preventAllControl() {
-    this._canvas.getObjects().forEach(obj => {
+    this.canvas.getObjects().forEach(obj => {
       // 可交互文本对象
       if (obj instanceof fabric.IText) {
         obj.exitEditing();

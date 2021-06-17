@@ -1,16 +1,18 @@
 ---
 toc: true
 categories:
-  - "JavaScript"
+  - JavaScript
 tags:
-  - "electron"
-  - "sass"
-series:
-  - "Electron Samples"
+  - electron
+  - sass
 title: Electron 悬浮窗
-date: "2021-06-03"
-description: "创建支持内容切换及拖拽的悬浮窗，包含完整目录结构及示例代码"
+date: 2021-06-03
+description: Electron 创建悬浮窗的示例代码
 ---
+
+创建支持内容切换及拖拽的悬浮窗，包含完整目录结构及示例代码。
+
+<!--more-->
 
 ## 目录结构
 
@@ -40,7 +42,7 @@ description: "创建支持内容切换及拖拽的悬浮窗，包含完整目录
 
 ## NPM
 
-`package.json`：
+`package.json`
 
 ```json
 {
@@ -66,7 +68,7 @@ description: "创建支持内容切换及拖拽的悬浮窗，包含完整目录
 
 ## 主进程
 
-`main.js`：
+`main.js`
 
 ```js
 const { app, BrowserWindow } = require('electron');
@@ -89,8 +91,7 @@ class Main {
 
   _forMacOs() {
     app.on('activate', () => {
-      if (BrowserWindow.getAllWindows().length === 0)
-        this._createWindow();
+      if (BrowserWindow.getAllWindows().length === 0) this._createWindow();
     });
 
     app.on('window-all-closed', () => {
@@ -102,15 +103,18 @@ class Main {
 new Main();
 ```
 
-`main/floating-window.js`：
+`main/floating-window.js`
 
 ```js
 const { BrowserWindow, ipcMain } = require('electron');
 
 class FloatingWindow {
-  width = 36;
-  height = 36;
+  _width = 36;
+  _height = 36;
   _min = true; // 是否是最小化的窗口尺寸
+  _maxWidth = 180;
+  _maxHeight = 180;
+  _regIpc = false;
 
   win;
 
@@ -122,8 +126,8 @@ class FloatingWindow {
 
   _createWindow() {
     this.win = new BrowserWindow({
-      width: this.width,
-      height: this.height,
+      width: this._width,
+      height: this._height,
       alwaysOnTop: true,
       hasShadow: false,
       transparent: true,
@@ -131,7 +135,7 @@ class FloatingWindow {
       resizable: false,
       skipTaskbar: true,
       
-      // Windows 中配置此属性，可避免一些 Bug
+      // 可避免一些在 Windows 中的 Bug，比如快捷键窗口切换时不再位于最上层等
       type: 'toolbar', 
 
       // 将窗口背景设置与页面背景一致，避免闪烁
@@ -146,6 +150,9 @@ class FloatingWindow {
     // this.win.webContents.openDevTools();
 
     this.win.loadFile('renderer/floating-window.html').then(() => {
+      if (this._regIpc) return;
+      
+      this._regIpc = true;
       this._toggleWindowSize();
     });
   }
@@ -155,9 +162,9 @@ class FloatingWindow {
       this._min = !this._min;
 
       if (this._min) {
-        this.win.setSize(this.width, this.height);
+        this.win.setSize(this._width, this._height);
       } else {
-        this.win.setSize(180, 180);
+        this.win.setSize(this._maxWidth, this._maxHeight);
       }
 
       return this._min;
@@ -170,15 +177,14 @@ module.exports = FloatingWindow;
 
 ## 渲染器进程
 
-`renderer/floating-window.html`：
+`renderer/floating-window.html`
 
 ```html
 <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Security-Policy"
-        content="script-src 'self' 'unsafe-inline'">
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'">
     <link rel="stylesheet" href="style.css">
     <title>悬浮窗</title>
   </head>
@@ -215,11 +221,9 @@ module.exports = FloatingWindow;
         }
 
         _hideAll() {
-          !this.logoEl.classList.contains('hidden')
-          && this.logoEl.classList.add('hidden');
+          !this.logoEl.classList.contains('hidden') && this.logoEl.classList.add('hidden');
 
-          !this.tipEl.classList.contains('hidden')
-          && this.tipEl.classList.add('hidden');
+          !this.tipEl.classList.contains('hidden') && this.tipEl.classList.add('hidden');
         }
       }
 
@@ -231,7 +235,7 @@ module.exports = FloatingWindow;
 
 ## 样式（Sass）
 
-`sass/abstracts/_helpers.scss`：
+`sass/abstracts/_helpers.scss`
 
 ```scss
 .hidden {
@@ -239,7 +243,7 @@ module.exports = FloatingWindow;
 }
 ```
 
-`sass/abstracts/_mixins.scss`：
+`sass/abstracts/_mixins.scss`
 
 ```scss
 @mixin no-drag {
@@ -251,13 +255,13 @@ module.exports = FloatingWindow;
 }
 ```
 
-`sass/abstracts/_variables.scss`：
+`sass/abstracts/_variables.scss`
 
 ```scss
 $color-primary: #2d2a2e;
 ```
 
-`sass/base/_base.scss`：
+`sass/base/_base.scss`
 
 ```scss
 @use '../abstracts/mixins' as *;
@@ -271,25 +275,22 @@ $color-primary: #2d2a2e;
 }
 
 html {
-  // 定义 1rem = 10px
-  font-size: 10px / 16px * 100%;
+  font-size: 10px / 16px * 100%; // 定义 1rem = 10px
 }
 
 body {
-  // Electron：系统字体
-  font: caption;
+  font: caption; // 系统字体
   font-size: 1.6rem;
-
   box-sizing: border-box;
 }
 
 img {
-  // Electron：图片不可拖拽
+  // 图片不可拖拽
   @include no-drag;
 }
 ```
 
-`sass/pages/_floating-window.scss`：
+`sass/pages/_floating-window.scss`
 
 ```scss
 @use '../abstracts/variables' as *;
@@ -298,6 +299,7 @@ img {
 .floating-window {
   height: 100vh;
   background-color: $color-primary;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -314,7 +316,7 @@ img {
 }
 ```
 
-`sass/main.scss`：
+`sass/main.scss`
 
 ```scss
 @use 'abstracts/helpers';

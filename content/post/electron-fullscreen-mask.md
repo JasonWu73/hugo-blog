@@ -1,14 +1,16 @@
 ---
 categories:
-  - "JavaScript"
+  - JavaScript
 tags:
-  - "electron"
-series:
-  - "Electron Samples"
+  - electron
 title: Electron 全屏遮罩
-date: "2021-06-08"
-description: "创建透明的全屏遮罩，包含 MacOS Menu Bar"
+date: 2021-06-08
+description: Electron 创建透明的全屏遮罩示例代码
 ---
+
+创建透明的全屏遮罩，可用于屏幕绘制（批注）、截图等。
+
+<!--more-->
 
 ```js
 const { app, BrowserWindow, screen } = require('electron');
@@ -30,7 +32,7 @@ class Main {
 
   _createWindow() {
     // `bounds`：使覆盖全屏幕，包含 MacOS Menu Bar
-    // `size`：仅工作区大小
+    // `size`：仅应用区大小
     const { width, height, x, y } = screen.getPrimaryDisplay().bounds;
 
     this.win = new BrowserWindow({
@@ -47,12 +49,12 @@ class Main {
       // 不会将窗口置于 MacOS Menu Bar 之上
       // alwaysOnTop: true,
 
-      // Windows 下必须配置，MacOS 下不需要（否则会打开一个全屏新桌面）
+      // Windows 下必须配置，而 MacOS 则不需要（否则会打开一个全屏新桌面）
       fullscreen: process.platform !== 'darwin',
-      // 使覆盖全屏幕，包含 MacOS Menu Bar
+      // 1）使覆盖全屏幕，包含 MacOS Menu Bar
       enableLargerThanScreen: true,
 
-      // Windows 下必须配置 `toolbar`，否则会禁用视频播放
+      // Windows 下必须配置，否则会禁用视频播放
       type: 'toolbar',
 
       webPreferences: {
@@ -61,7 +63,7 @@ class Main {
       }
     });
 
-    // 使覆盖全屏幕，包含 MacOS Menu Bar
+    // 2）使覆盖全屏幕，包含 MacOS Menu Bar
     this.win.setAlwaysOnTop(true, 'screen-saver');
 
     this.win.loadFile('renderer/index.html');
@@ -69,8 +71,7 @@ class Main {
 
   _forMacOs() {
     app.on('activate', () => {
-      if (BrowserWindow.getAllWindows().length === 0)
-        this._createWindow();
+      if (BrowserWindow.getAllWindows().length === 0) this._createWindow();
     });
 
     app.on('window-all-closed', () => {
