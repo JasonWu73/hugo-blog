@@ -50,10 +50,12 @@ DefaultContentLanguage = "zh"
 
 [[Params.Socials]]
     Name = "邮箱"
+    Title = "wuxianjiezh@gmail.com"
     Icon = "envelope-square"
-    URL = "mailto:wuxianjiezh@163.com"
+    URL = "mailto:wuxianjiezh@gmail.com"
 
 [[Params.Socials]]
     Name = "GitHub"
+    Title = "吴仙杰 GitHub"
     Icon = "github"
     URL = "https://github.com/JasonWu73/"
