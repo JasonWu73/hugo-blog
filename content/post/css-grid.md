@@ -1,17 +1,17 @@
 ---
 toc: true
 categories:
-  - "HTML & CSS"
+  - HTML & CSS
 tags:
-  - "layout"
-series:
-  - "CSS Docs"
-title: "CSS 二维布局：Grid"
-date: "2021-06-16"
-description: "CSS 二维布局 Grid"
+  - CSS Layout
+title: CSS 布局：Grid
+date: 2021-06-16
+description: CSS 二维布局 - Grid
 ---
 
 ![](/img/css-grid-overview.jpg)
+
+<!--more-->
 
 ## 网格容器
 
@@ -43,26 +43,25 @@ grid-auto-flow
 
 ### 网格单位
 
-数值单位：
+数值：
 
 - `fr`，类比 Flexbox 的 `flex-grow`
-    - 用于延伸剩余的所有可用空间
+    - 延伸剩余的所有可用空间
         - `grid-template-columnsn: repeat(2, 150px) 1fr`
-    - 用于按比例划分可用空间
+    - 按比例划分可用空间
         - `grid-template-columnsn: 1fr 1fr 2fr`
         - `grid-template-columnsn: 50% 1fr 2fr`
 
-关键字单位：
+关键字：
 
 - `max-content`，最大内容尺寸
     - `grid-template-columns: max-content 1fr 1fr max-content`
 - `min-content`，最小内容尺寸
     - `grid-template-rows: repeat(2, min-content);`
     - `grid-template-columns: min-content 1fr 1fr min-content`
-- `auto-fill`，使用所有可用空间，自动划分网格航向（多余则为空）
+- `auto-fill`，对所有可用空间进行划分网格航向
     - `grid-template-columns: repeat(auto-fill, 100px);`
-- `auto-fit`，仅使用需要的空间，自动划分网格航向
-    - `grid-template-columns: repeat(auto-fill, 100px);`
+- `auto-fit`，按需划分网格航向
     - `grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));`
 
 函数：
@@ -70,7 +69,7 @@ grid-auto-flow
 - `repeat(num, unit)`，定义重复值
     - `grid-template-rows: repeat(3, 150px)`
     - `grid-template-rows: repeat(2, 150px) 300px`
-- `minmax(v1, v2)`，代表取值最小要 `v1`，最大不能超过 `v2`
+- `minmax(v1, v2)`，代表取值最小要 `v1`，最大不能超过 `v2`，其中 `v2` 值可以比 `v1` 小
     - `grid-template-rows: repeat(2, minmax(150px, min-content));`
 
 ### 显式与隐式网格
@@ -110,7 +109,7 @@ grid-coumn-end
 justify-self
 align-self
 
-/* 定义网格项排序顺序 */
+/* 定义网格项排序 */
 order
 ```
 
@@ -123,7 +122,7 @@ grid-row-end: 2;
 grid-column-start: 3;
 grid-column-end: 4;
 
-/* 将网格项放于指定位置（简写，推荐）*/
+/* 将网格项放于指定位置（简写）*/
 grid-row: 1 / 2;
 grid-column: 3 / 4;
 
@@ -136,9 +135,8 @@ grid-column: 1 / span 2;
 grid-column: 1 / -1;
 ```
 
-- 在未明确定位时，当跨越已被明确定位的网格项，则该跨越项会移到最后一行
-- 在同时指定定位和跨越时，则一个单元格可同时被多个网格项填充
-    - `z-index` 可控制哪个显示在上层
+- 当跨越已被显式定位的网格项时，则该跨越项会被换行
+- 当同时指定定位和跨越时，则一个网格单元可被多个网格项填充，其中 `z-index` 用于控制哪个显示在前
 
 ## 命名网格线
 
@@ -156,16 +154,16 @@ grid-column: col-start 2 / grid-end;
 
 ## 命名网格区
 
-未命名：
+未命名的网格：
 
 ```css
-  .container {
+.container {
   width: 1000px;
   margin: 30px auto;
 
   display: grid;
   grid-template-rows: 100px 200px 400px 100px;
-  grid-template-columns: repeat(3, 1fr) 200px;
+  grid-template-columns: 200px repeat(3, 1fr);
   grid-gap: 30px;
 }
 
@@ -195,13 +193,13 @@ grid-column: col-start 2 / grid-end;
 命名网格线：
 
 ```css
-  .container {
+.container {
   width: 1000px;
   margin: 30px auto;
 
   display: grid;
   grid-template-rows: [header-start] 100px [header-end box-start] 200px [box-end main-start] 400px [main-end footer-start] 100px [footer-end];
-  grid-template-columns: repeat(3, [col-start] 1fr [col-end]) 200px [grid-end];
+  grid-template-columns: [side-start] 200px [side-end] repeat(3, [col-start] 1fr [col-end]);
   grid-gap: 30px;
 }
 
@@ -212,7 +210,7 @@ grid-column: col-start 2 / grid-end;
 }
 
 .header {
-  grid-column: col-start 1 / grid-end;
+  grid-column: side-start / -1;
 }
 
 .sidebar {
@@ -220,29 +218,29 @@ grid-column: col-start 2 / grid-end;
 }
 
 .main-content {
-  grid-column: col-start 2 / grid-end;
+  grid-column: col-start 1 / -1;
 }
 
 .footer {
-  grid-column: col-start 1 / -1;
+  grid-column: side-start / -1;
 }
 ```
 
 命名网格区：
 
 ```css
-  .container {
+.container {
   width: 1000px;
   margin: 30px auto;
 
   display: grid;
   grid-template-rows: 100px 200px 400px 100px;
-  grid-template-columns: repeat(3, 1fr) 200px;
+  grid-template-columns: 200px repeat(3, 1fr);
   grid-gap: 30px;
   grid-template-areas: "head head head head"
-                         "box box box side"
-                         "main main main side"
-                         "foot foot foot foot";
+                       "side box box box"
+                       "side main main main"
+                       "foot foot foot foot";
 }
 
 .container > div {
@@ -277,12 +275,12 @@ grid-column: col-start 2 / grid-end;
 
   display: grid;
   grid-template-rows: 100px 200px 400px 100px;
-  grid-template-columns: repeat(3, 1fr) 200px;
+  grid-template-columns: 200px repeat(3, 1fr);
   grid-gap: 30px;
-  grid-template-areas: ". head head ."
-                     "box-1 box-2 box-3 side"
-                     "main main main side"
-                     "foot foot foot foot";
+  grid-template-areas: ". head head head"
+                       "side box-1 box-2 box-3"
+                       "side main main main"
+                       "foot foot foot foot";
 }
 
 .container > div {
@@ -295,6 +293,10 @@ grid-column: col-start 2 / grid-end;
   grid-area: head;
 }
 
+.sidebar {
+  grid-area: side;
+}
+
 .box-1 {
   grid-area: box-1;
 }
@@ -305,10 +307,6 @@ grid-column: col-start 2 / grid-end;
 
 .box-3 {
   grid-area: box-3;
-}
-
-.sidebar {
-  grid-area: side;
 }
 
 .main-content {
@@ -346,7 +344,7 @@ HTML 源码：
 
 ## 对齐网格项
 
-网格项相对于网格单元或网格区的对齐。
+*网格项相对于网格单元或网格区的对齐。*
 
 ```css
 /* 在网格容器中整体定义 */
@@ -364,7 +362,7 @@ align-self: stretch | center | end | start;
 
 ## 对齐网格航向
 
-网格航向相对于网格容器的对齐。
+*网格航向相对于网格容器的对齐。*
 
 ```css
 /* 在网格容器中定义 */
@@ -374,6 +372,6 @@ justify-content: center | end | start | space-between | space-around | space-eve
 align-content: center | end | start | space-between | space-around | space-evenly;
 ```
 
-默认情况下，网格会遵循 HTML 源代码顺序，即当剩余网格区不足以放下网格项时，自动留空并创建新的网格航向。
+默认策略：网格会遵循 HTML 源码中编写的顺序，当剩余网格区不足以放下网格项时，自动留空并创建新的网格航向。
 
-可以使用 `dense` 关键字（`grid-auto-flow: row dense`）修改该策略，即忽略网格项在源代码中的顺序，保持密集，尽量不留空。
+默认策略：使用 `dense` 关键字（`grid-auto-flow: row dense`），忽略网格项在源码中的顺序，保持密集，尽量不留空。

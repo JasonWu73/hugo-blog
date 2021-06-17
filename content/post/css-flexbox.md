@@ -1,19 +1,19 @@
 ---
 toc: true
 categories:
-  - "HTML & CSS"
+  - HTML & CSS
 tags:
-  - "layout"
-series:
-  - "CSS Docs"
-title: "CSS 一维布局：Flexbox"
-date: "2021-06-16"
-description: "CSS 一维布局 Flexbox"
+  - CSS Layout
+title: CSS 布局：Flexbox
+date: 2021-06-16
+description: CSS 一维布局 - Flexbox
 ---
 
 ![](/img/css-flexbox-overview.jpg)
 
-## Flexbox Container
+<!--more-->
+
+## Flexbox 容器
 
 ```css
 flex-direction: row | row-reverse | column | column-reverse;
@@ -27,7 +27,7 @@ align-items: stretch | flex-start | flex-end | center | baseline;
 align-content: stretch | flex-start | flex-end | center | space-between | space-around;
 ```
 
-## Flexbox Items
+## Flexbox 项
 
 *Flexbox 借助 `margin` 来调整 Gutter。*
 

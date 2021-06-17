@@ -1,15 +1,17 @@
 ---
 toc: true
 categories:
-  - "HTML & CSS"
+  - HTML & CSS
 tags:
-  - "sass"
-series:
-  - "CSS Samples"
-title: "Sass 7-1 Pattern"
-date: "2021-06-03"
-description: "Sass 目录结构设计与 CSS 通用样式代码"
+  - Sass
+title: Sass 7-1 Pattern
+date: 2021-06-03
+description: Sass 目录设计与 CSS（SCSS）代码示例
 ---
+
+Sass 目录结构设计与 CSS（SCSS）实用代码。
+
+<!--more-->
 
 ## Sass 7-1 Pattern
 
@@ -63,17 +65,18 @@ sass/
 `– main.scss             # Main Sass file
 ```
 
-## 实用 CSS
+## CSS（SCSS）实用代码
 
-`sass/abstracts/_variables.scss`：
+`sass/abstracts/_variables.scss`
 
 ```scss
 $color-grey: #e3e3e3;
 ```
 
-`sass/abstracts/_mixins.scss`：
+`sass/abstracts/_mixins.scss`
 
 ```scss
+// 清除浮动元素
 @mixin clearfix {
   &::after {
     content: '';
@@ -82,18 +85,22 @@ $color-grey: #e3e3e3;
   }
 }
 
+// Electron App，不可选中
 @mixin no-selection {
   user-select: none;
 }
 
+// Electron App，禁止拖拽
 @mixin no-drag {
   -webkit-user-drag: none;
 }
 
+// 将黑色 SVG 图片内容转换为白色
 @mixin filter-white {
   filter: invert(100%);
 }
 
+// 绝对定位下的垂直居中
 @mixin absoluteCenter {
   position: absolute;
   left: 0;
@@ -103,15 +110,16 @@ $color-grey: #e3e3e3;
 }
 ```
 
-`sass/abstracts/_helpers.scss`：
+`sass/abstracts/_helpers.scss`
 
 ```scss
+// 隐藏元素
 .hidden {
   display: none !important;
 }
 ```
 
-`sass/base/_base.scss`：
+`sass/base/_base.scss`
 
 ```scss
 @use '../abstracts/mixins' as *;
@@ -125,29 +133,26 @@ $color-grey: #e3e3e3;
 }
 
 html {
-  // 定义 1rem = 10px
-  font-size: 10px / 16px * 100%;
+  font-size: 10px / 16px * 100%; // 定义 1rem = 10px
 }
 
 body {
-  // Electron：系统字体
-  font: caption;
+  font: caption; // Electron App，使用系统字体
   font-size: 1.6rem;
-
   box-sizing: border-box;
 }
 
 img {
-  // Electron：图片不可拖拽
-  @include no-drag;
+  @include no-drag; // Electron App，防止图标可被拖拽
 }
 ```
 
-`sass/components/_widgets.scss`：
+`sass/components/_widgets.scss`
 
 ```scss
 @use '../abstracts/variables' as *;
 
+// 可在内容区中自定义长度的竖线
 .vertical_bar {
   float: right;
   border-right: .1rem solid $color-grey;
@@ -155,7 +160,7 @@ img {
 }
 ```
 
-`sass/_main.scss`：
+`sass/_main.scss`
 
 ```scss
 @use './abstracts/helpers';
