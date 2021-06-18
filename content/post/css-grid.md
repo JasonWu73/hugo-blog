@@ -373,6 +373,6 @@ justify-content: center | end | start | space-between | space-around | space-eve
 align-content: center | end | start | space-between | space-around | space-evenly;
 ```
 
-默认策略：网格会遵循 HTML 源码中编写的顺序，当剩余网格区不足以放下网格项时，自动留空并创建新的网格航向。
+默认策略：网格会遵循 HTML 源码中编写的顺序，当剩余网格区不足以放下网格项时，会自动留空并创建新的网格航向。
 
-默认策略：使用 `dense` 关键字（`grid-auto-flow: row dense`），忽略网格项在源码中的顺序，保持密集，尽量不留空。
+而使用 `dense` 关键字（`grid-auto-flow: row dense`），则可以忽略网格项在源码中的顺序，使网格保持密集，尽量不留空。

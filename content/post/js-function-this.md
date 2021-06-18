@@ -129,7 +129,7 @@ document.querySelector('.btn-like').addEventListener(
 // Electron，点赞数 👍：1
 ```
 
-由于事件处理函数会绑定自己的 this 值。因此下面代码是**错误**的，其中 `this` 的值为 *HTML Button 元素*：
+由于事件处理函数会绑定自己的 `this` 值。因此下面代码是**错误**的，其中 `this` 的值为 *HTML Button 元素*：
 
 ```js
 document.querySelector('.btn-like')
