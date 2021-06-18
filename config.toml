@@ -40,7 +40,7 @@ DefaultContentLanguage = "zh"
 [[Menu.Main]]
     Name = "归档"
     Pre = "paperclip"
-    URL = "/post/"
+    URL = "/posts/"
     Weight = 3
 [[Menu.Main]]
     Name = "关于"

@@ -1,4 +1,4 @@
-{{ $paginator := .Paginate (where .Site.RegularPages "Section" "post") }}
+{{ $paginator := .Paginate (where .Site.RegularPages "Section" "posts") }}
  <section id="posts" class="posts-expand">
 {{ range $paginator.Pages }}
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
@@ -9,7 +9,7 @@
         </a>
       </h1>
       <div class="post-meta">
-      {{ partial "post/date.html" .}} 
+      {{ partial "post/date.html" .}}
       {{ partial "post/category.html" .}}
       {{ partial "post/readtime.html" .}}
       </div>
@@ -29,4 +29,3 @@
 {{end}}
 </section>
 {{ partial "pagination.html" . }}
-

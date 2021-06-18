@@ -26,7 +26,7 @@ JS 中实现原型继承有三种方式：
 - [构造函数]({{< relref "#构造函数" >}})
     - 使用普通函数创建对象，然后指定原型
     - JS 最早实现 OOP 的方式
-- [ES6 Class]({{< relref "/post/js-oop-class" >}})
+- [ES6 Class]({{< relref "/posts/js-oop-class" >}})
     - 现代 JS 创建对象的方式，但它仅仅是构造函数的“语法糖”
 - [`Object.create()`]({{< relref "#objectcreate" >}})
     - 将现有对象作为原型对象，从而创建一个新对象（空对象 `{}`）

@@ -63,7 +63,7 @@ Promise.reject(new Error('错误'))
 
 ## Promise ≠ 异步
 
-Promise 不等于异步：Promise 不会也不能将同步代码转为异步代码，它的作用仅仅是包装异步代码，从而使调用异步变得更加优雅，并使之支持 [`async`/`await` 关键字]({{< relref "/post/js-async-await" >}})。
+Promise 不等于异步：Promise 不会也不能将同步代码转为异步代码，它的作用仅仅是包装异步代码，从而使调用异步变得更加优雅，并使之支持 [`async`/`await` 关键字]({{< relref "/posts/js-async-await" >}})。
 
 ```js
 const startMilli = Date.now();
