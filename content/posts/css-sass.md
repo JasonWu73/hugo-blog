@@ -151,12 +151,46 @@ img {
 
 ```scss
 @use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
 
 // 可在内容区中自定义长度的竖线
 .vertical_bar {
   float: right;
   border-right: .1rem solid $color-grey;
   height: 100%;
+}
+
+// 带箭头的提示框
+.tooltip {
+  position: relative;
+
+  .tip {
+    @include absoluteCenter;
+
+    display: none;
+    width: 12.5rem;
+    padding: .5rem;
+    background: black;
+    color: white;
+
+    &:before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border-left: .8rem solid transparent;
+      border-right: .8rem solid transparent;
+      border-bottom: .8rem solid black;
+      transform: translateY(-1.5rem);
+
+      @include absoluteCenter;
+      top: 1rem;
+    }
+  }
+
+  &:hover .tip {
+    display: block;
+  }
 }
 ```
 
