@@ -10,8 +10,6 @@ description: Electron 创建透明的全屏遮罩示例代码
 
 创建透明的全屏遮罩，可用于屏幕绘制（批注）、截图等。
 
-<!--more-->
-
 ```js
 const { app, BrowserWindow, screen } = require('electron');
 
@@ -82,3 +80,5 @@ class Main {
 
 new Main();
 ```
+
+<!--more-->

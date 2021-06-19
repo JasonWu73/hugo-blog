@@ -31,6 +31,8 @@ Promise 生命周期：
     - Rejected：异步任务执行失败，即发生了错误
         - `then(onFulfilled[, onRejected])` 或 `catch()`
 
+<!--more-->
+
 ## 构建 Promise
 
 Promise 是一个特殊的对象，接收一个执行器（executor）函数，其中执行器函数包含两个参数：

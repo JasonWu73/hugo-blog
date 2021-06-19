@@ -11,8 +11,6 @@ description: Sass 目录设计与 CSS（SCSS）代码示例
 
 Sass 目录结构设计与 CSS（SCSS）实用代码。
 
-<!--more-->
-
 ## Sass 7-1 Pattern
 
 ```
@@ -64,6 +62,8 @@ sass/
 |
 `– main.scss             # Main Sass file
 ```
+
+<!--more-->
 
 ## CSS（SCSS）实用代码
 

@@ -13,8 +13,6 @@ description: ES2017 async/await 及 Promise Combinator
 
 通过 ES2017 `async`/`await` 及 Promise Combinator 实现优雅的异步代码。
 
-<!--more-->
-
 ## 以同步写异步
 
 语法糖：`async`/`await` 并没有为 JS 语言添加新特性，仅仅是为 Promise 提供了一种更易写易懂的语法。
@@ -61,6 +59,8 @@ const wait = sec =>
 //     return wait(1);
 //   });
 ```
+
+<!--more-->
 
 ## 代码求证语法糖
 

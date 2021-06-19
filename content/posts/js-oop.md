@@ -18,6 +18,8 @@ JS 中的 OOP 与 Java 不同，JS 中没有真正意义上的类，它是通过
 
 面向对象的四大基本特征：抽象（Abstraction）、封装（Encapsulation）、继承（Inheritance）和多态（Polymorphism）在 JS OOP 中和其他语言没有任何区别。
 
+<!--more-->
+
 原型继承（Prototypal Inheritance）
 : 原型对象的所有属性和方法都可以被链接到它的对象访问。
 

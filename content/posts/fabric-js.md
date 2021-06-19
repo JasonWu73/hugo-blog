@@ -10,8 +10,6 @@ description: Fabric.js v4.4.0 示例代码
 
 Fabric.js v4.4.0 实现画笔、文本、直线及椭圆等绘制的示例代码。
 
-<!--more-->
-
 `index.html`
 
 ```html
@@ -98,6 +96,8 @@ Fabric.js v4.4.0 实现画笔、文本、直线及椭圆等绘制的示例代码
   </body>
 </html>
 ```
+
+<!--more-->
 
 `index.js`
 

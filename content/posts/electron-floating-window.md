@@ -12,8 +12,6 @@ description: Electron 创建悬浮窗的示例代码
 
 创建支持内容切换及拖拽的悬浮窗，包含完整目录结构及示例代码。
 
-<!--more-->
-
 ## 目录结构
 
 ```
@@ -39,6 +37,8 @@ description: Electron 创建悬浮窗的示例代码
 ├── package.json
 └── package-lock.json
 ```
+
+<!--more-->
 
 ## NPM
 

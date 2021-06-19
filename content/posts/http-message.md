@@ -11,8 +11,6 @@ description: HTTP Request Message 和 HTTP Response Message
 
 HTTP 请求报文（Request Message）和 HTTP 响应报文（Response Message）格式。
 
-<!--more-->
-
 ## 请求报文
 
 ```http
@@ -23,6 +21,8 @@ Accept-Language: en,zh;q=0.9
 
 <BODY>
 ```
+
+<!--more-->
 
 1. 请求行（Request-Line）：`Request-Line = Method SP Request-URI SP HTTP-Version CRLF`
 2. 0个或多个请求头

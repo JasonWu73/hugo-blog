@@ -4,7 +4,7 @@ categories:
   - JavaScript
 tags:
   - Module
-title: 📌 JavaScript ES6 模块
+title: 📌 ES6 模块
 weight: 1
 date: 2021-06-04
 description: ES6 import/export 模块
@@ -20,6 +20,8 @@ description: ES6 import/export 模块
 | 导入/导出 | 支持，但只支持顶级导入/导出，且导入会 Hoisted | 不支持 |
 | HTML 中 | `<script type="module">` | `<script>` |
 | 下载文件 | 异步 | 同步 |
+
+<!--more-->
 
 ## ES6 模块特点
 

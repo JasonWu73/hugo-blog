@@ -11,8 +11,6 @@ description: JS 的 call、apply 和 bind 函数
 
 动态修改 JS 函数中的 `this` 值。
 
-<!--more-->
-
 ## 通用代码片段
 
 ```js
@@ -38,6 +36,8 @@ const nodeCourse = {
   people: 0
 };
 ```
+
+<!--more-->
 
 ## Function.prototype.call()
 

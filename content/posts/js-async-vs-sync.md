@@ -29,6 +29,8 @@ p.style.color = 'red';
 <script src="index.js"></script>
 ```
 
+<!--more-->
+
 ## 异步代码
 
 - 只会在“后台”任务执行完成后执行

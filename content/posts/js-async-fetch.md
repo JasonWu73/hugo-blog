@@ -11,10 +11,6 @@ date: 2021-05-30
 description: 通过 Fetch API 发送 AJAX 请求
 ---
 
-通过 Fetch API 发送 AJAX 请求。
-
-<!--more-->
-
 ## fetch 会立即触发 AJAX 请求
 
 调用 `fetch` 函数时就会在后台**立即**执行 AJAX 请求。比如：
@@ -29,6 +25,8 @@ console.log(postPro); // Promise {<pending>}
 ```
 
 AJAX 的执行与 then、catch 和 finally 无关：`then`、`catch` 和 `finally` 仅仅代表在 AJAX 请求结束后，应该执行什么样的操作，而 AJAX 在调用 `fetch` 函数时就已经开始执行了。
+
+<!--more-->
 
 ## 自动装箱 Promise
 
