@@ -3,7 +3,7 @@ toc: true
 categories:
   - JavaScript
 tags:
-  - JS Module
+  - Module
 title: 📌 JavaScript ES6 模块
 weight: 1
 date: 2021-06-04
