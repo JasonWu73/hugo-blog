@@ -4,20 +4,20 @@ categories:
   - JavaScript
 tags:
   - npm
-title: Npm 包管理器
+title: npm 包管理器
 date: 2021-06-19
-description: Npm Package Manager
+description: npm Package Manager
 ---
 
 ## 语义化版本号
 
-Npm 的语义化版本号由三组数字组成，格式为 `v<主版本号>.<次版本号>.<补丁版本号>`：
+npm 的语义化版本号由三组数字组成，格式为 `v<主版本号>.<次版本号>.<补丁版本号>`：
 
 - 主版本号：发生不兼容变化
 - 次版本号：增加、优化功能
 - 补丁版本号：修复 Bug
 
-## Npm 版本管理
+## npm 版本管理
 
 - `^1.0.0`，默认，跟踪次版本或补丁版本号
 - `~1.0.0`，仅跟踪补丁版本号，更加保守和稳定的选择
