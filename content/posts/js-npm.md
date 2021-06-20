@@ -42,7 +42,7 @@ npm 的语义化版本号由三组数字组成，格式为 `v<主版本号>.<次
 > 故 `package.json` 和 `package-lock.json` 文件都需要加入版本控制。
 
 `npm install`
-:  根据 `package.json` 安装所有依赖至当前目录 `node_modules`。
+:  根据 `package.json` 安装依赖至当前目录 `node_modules`。
 
 `npm uninstall [-g] <package>`
 :  从目录 `node_modules` 中删除指定依赖。
@@ -54,3 +54,11 @@ npm 的语义化版本号由三组数字组成，格式为 `v<主版本号>.<次
 
 ` npm root -g`
 :  查看全局安装目录 `node_modules`。
+
+## 帮助
+
+`npm help`
+:  查看可用命令。
+
+`npm help install`
+:  查看安装命令的可用选项。
