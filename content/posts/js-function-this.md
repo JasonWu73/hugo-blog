@@ -3,7 +3,7 @@ toc: true
 categories:
   - JavaScript
 tags:
-  - 关键字 this
+  - this
 title: JavaScript 函数中的 this 值
 date: 2021-05-29
 description: JS 的 call、apply 和 bind 函数

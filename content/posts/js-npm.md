@@ -3,7 +3,7 @@ toc: true
 categories:
   - JavaScript
 tags:
-  - npm
+  - Package Manager
 title: npm 包管理器
 date: 2021-06-19
 description: npm Package Manager

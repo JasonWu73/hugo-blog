@@ -3,7 +3,7 @@ toc: true
 categories:
   - Python
 tags:
-  - Module
+  - Package Manager
 title: pip 包管理器及虚拟环境（venv）
 date: 2021-06-20
 description: Python pip 及 venv
