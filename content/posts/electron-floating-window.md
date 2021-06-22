@@ -284,6 +284,14 @@ body {
   box-sizing: border-box;
 }
 
+// 不需要轮廓线
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
 img {
   // 图片不可拖拽
   @include no-drag;
