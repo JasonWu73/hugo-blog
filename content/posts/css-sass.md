@@ -160,6 +160,16 @@ img {
   height: 100%;
 }
 
+// 可在内容区中自定义长度的横线
+// 父级容器 `position: relative`
+.horizontal_bar {
+  position: absolute;
+  bottom: 0;
+  border-bottom: .1rem solid $color-grey;
+  width: 100%;
+  z-index: 0;
+}
+
 // 带箭头的提示框
 .tooltip {
   position: relative;
