@@ -224,8 +224,8 @@ inode
 
 ## 常用命令
 
-`sudo !!`
-:  使用 `sudo` 再次执行上次命令。
+`[sudo] !!`
+:  再次执行上次命令（可指定 `sudo` 及额外可选项）。
 
 `pwd`
 :  显示当前所在目录的绝对路径（print working directory）。
