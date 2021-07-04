@@ -4,8 +4,7 @@ categories:
   - HTML & CSS
 tags:
   - CSS Layout
-title: 📌 CSS 布局：Grid
-weight: 1
+title: CSS 布局：Grid
 date: 2021-06-16
 description: CSS 二维布局 - Grid
 ---

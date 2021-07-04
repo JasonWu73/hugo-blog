@@ -5,8 +5,7 @@ categories:
 tags:
   - Async
   - Promise
-title: 📌 JavaScript 构建 Promise
-weight: 1
+title: JavaScript 构建 Promise
 date: 2021-05-30
 description: 通过 Promise 优化旧的 JS 异步 API
 ---

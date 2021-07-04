@@ -5,8 +5,7 @@ categories:
 tags:
   - Async
   - Promise
-title: 📌 JavaScript 使用 Promise：Async/Await
-weight: 1
+title: JavaScript 使用 Promise：Async/Await
 date: 2021-05-31
 description: ES2017 async/await 及 Promise Combinator
 ---

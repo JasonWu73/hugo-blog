@@ -4,8 +4,7 @@ categories:
   - JavaScript
 tags:
   - Module
-title: 📌 ES6 模块
-weight: 1
+title: ES6 模块
 date: 2021-06-04
 description: ES6 import/export 模块
 ---
