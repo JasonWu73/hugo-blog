@@ -1,13 +1,14 @@
 baseURL = "https://www.wuxianjie.net/"
 languageCode = "zh-CN"
+# 网站名称与联网备案信息保持一致
 title = "个人技术站点JASONWU"
-Theme =  "next"
-MetaDataFormat =  "yaml"
-CanonifyUrls =  true
-BuildDrafts =  false
-PaginatePath =  "p"
+Theme = "next"
+MetaDataFormat = "yaml"
+CanonifyUrls = true
+BuildDrafts = false
+PaginatePath = "p"
 Paginate = 10
-DisablePathToLower =  false
+DisablePathToLower = false
 HasCJKLanguage = true
 PreserveTaxonomyNames = false
 UglyUrls = false
@@ -17,45 +18,47 @@ pygmentsCodefencesGuessSyntax = true
 DefaultContentLanguage = "zh"
 
 [Params]
-    Introduce = "全栈开发"
-    Description = "吴仙杰 | Jason Wu | 博客"
-    Keywords =  "吴仙杰,jasonwu,个人,博客,程序员,技术,分享"
-    Subtitle = "Keep Coding"
-    Imglogo = "/img/logo.png"
-    AuthorImg = "/img/author.jpg"
-    DateFormat = "2006-01-02"
-    YearFormat = "2006年"
-    MonthFormat = "01-02"
-    BaiduStatsId = "e4fe9ee72eda87a23b2c1f9fd6a8ba12"
-    Fancybox = true
+Introduce = "Talk is cheap. Show me the code."
+Description = "吴仙杰 | wuxianjie | Jason Wu"
+Keywords = "吴仙杰,wuxianjie,jasonwu"
+Subtitle = "Keep Coding"
+Imglogo = "/img/logo.png"
+AuthorImg = "/img/author.jpg"
+DateFormat = "2006-01-02"
+YearFormat = "2006 年"
+MonthFormat = "01-02"
+BaiduStatsId = "e4fe9ee72eda87a23b2c1f9fd6a8ba12"
+Fancybox = true
 
 [Author]
-    Name = "吴仙杰"
+Name = "吴仙杰"
 
 [[Menu.Main]]
-    Name = "文章"
-    Pre = "code"
-    URL = "/"
-    Weight = 1
-[[Menu.Main]]
-    Name = "归档"
-    Pre = "paperclip"
-    URL = "/posts/"
-    Weight = 3
-[[Menu.Main]]
-    Name = "关于"
-    Pre = "info"
-    URL = "/about/"
-    Weight = 4
+Name = "文章"
+Pre = "code"
+URL = "/"
+Weight = 1
 
-[[Params.Socials]]
-    Name = "邮箱"
-    Title = "wuxianjiezh@gmail.com"
-    Icon = "envelope-square"
-    URL = "mailto:wuxianjiezh@gmail.com"
+[[Menu.Main]]
+Name = "归档"
+Pre = "paperclip"
+URL = "/posts/"
+Weight = 2
+
+[[Menu.Main]]
+Name = "关于"
+Pre = "info"
+URL = "/about/"
+Weight = 3
 
 [[Params.Socials]]
-    Name = "GitHub"
-    Title = "吴仙杰 GitHub"
-    Icon = "github"
-    URL = "https://github.com/JasonWu73/"
+Name = "邮箱"
+Title = "wuxianjiezh@gmail.com"
+Icon = "envelope-square"
+URL = "mailto:wuxianjiezh@gmail.com"
+
+[[Params.Socials]]
+Name = "GitHub"
+Title = "吴仙杰 GitHub"
+Icon = "github"
+URL = "https://github.com/JasonWu73/"
