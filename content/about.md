@@ -1,5 +1,5 @@
 ---
-title: "关于"
+title: "About"
 date: "2022-03-11"
 description: "关于吴仙杰的个人站点介绍"
 ---

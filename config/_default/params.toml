@@ -1,0 +1,34 @@
+AuthorName = "吴仙杰"
+Introduce = "业精于勤 | 行成于思"
+Keywords = "吴仙杰,wuxianjie,jasonwu"
+Description = "吴仙杰 | wuxianjie | Jason Wu"
+Subtitle = "Keep Coding"
+AuthorImg = "/img/author.jpg"
+DateFormat = "2006-01-02"
+YearFormat = "2006 年"
+MonthFormat = "01-02"
+
+[Footer]
+PoliceLink = "http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010302003726"
+PoliceNo = "浙公网安备 33010302003726号"
+ICPLink = "https://beian.miit.gov.cn/"
+ICPNo = "浙ICP备2021017187号-1"
+
+[Statis]
+BaiduSiteId = "e4fe9ee72eda87a23b2c1f9fd6a8ba12"
+
+[[Socials]]
+Name = "邮箱"
+Title = "wuxianjiezh@gmail.com"
+Icon = "envelope-square"
+URL = "mailto:wuxianjiezh@gmail.com"
+
+[[Socials]]
+Name = "GitHub"
+Title = "吴仙杰 GitHub"
+Icon = "github"
+URL = "https://github.com/JasonWu73/"
+
+#[[Links]]
+#Name = "test"
+#Permalink = "https://test.com/"

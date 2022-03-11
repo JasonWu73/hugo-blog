@@ -1,0 +1,15 @@
+<div class="copyright">
+  <span itemprop="copyrightYear">&copy; 2021-{{ now.Year }}</span>
+  <span class="author" itemprop="copyrightHolder">{{ .Site.Author.name }} All Rights Reserved</span>
+</div>
+
+<div class="copyright">
+  <a target="_blank"
+     href="{{ .Site.Params.Footer.PoliceLink }}"
+     style="border-bottom: none;">
+    <img src="/img/police-shield.png"
+         style="display: inline; vertical-align: text-top;">{{ .Site.Params.Footer.PoliceNo }}</a>
+
+  <a href="{{ .Site.Params.Footer.ICPLink }}" target="_blank"
+     style="border-bottom: none;">{{ .Site.Params.Footer.ICPNo }}</a>
+</div>

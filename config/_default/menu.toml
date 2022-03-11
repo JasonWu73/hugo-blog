@@ -1,0 +1,17 @@
+[[Main]]
+  Name = "Home"
+  Pre = "home"
+  URL = "/"
+  Weight = 1
+
+[[Main]]
+  Name = "Posts"
+  Pre = "paperclip"
+  URL = "posts"
+  Weight = 2
+
+[[Main]]
+  Name = "About"
+  Pre = "info"
+  URL = "about"
+  Weight = 3
