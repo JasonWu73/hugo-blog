@@ -1,21 +1,21 @@
-baseURL = "https://www.wuxianjie.net/"
-languageCode = "zh-CN"
 # 网站名称与联网备案信息保持一致
 title = "个人技术站点JASONWU"
+baseURL = "https://www.wuxianjie.net/"
+languageCode = "zh-CN"
+DefaultContentLanguage = "zh"
+HasCJKLanguage = true
 Theme = "next"
 MetaDataFormat = "yaml"
-CanonifyUrls = true
+CanonifyUrls = false
 BuildDrafts = false
 PaginatePath = "p"
 Paginate = 10
 DisablePathToLower = false
-HasCJKLanguage = true
 PreserveTaxonomyNames = false
 UglyUrls = false
 PygmentsStyle = "perldoc"
 pygmentsCodefences = true
 pygmentsCodefencesGuessSyntax = true
-DefaultContentLanguage = "zh"
 
 [Params]
 Introduce = "业精于勤 | 行成于思"
