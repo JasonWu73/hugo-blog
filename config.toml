@@ -18,7 +18,7 @@ pygmentsCodefencesGuessSyntax = true
 DefaultContentLanguage = "zh"
 
 [Params]
-Introduce = "Talk is cheap. Show me the code."
+Introduce = "业精于勤 | 行成于思"
 Description = "吴仙杰 | wuxianjie | Jason Wu"
 Keywords = "吴仙杰,wuxianjie,jasonwu"
 Subtitle = "Keep Coding"
